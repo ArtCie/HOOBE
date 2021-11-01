@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400');
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+
+    background: transparent linear-gradient(180deg, #FDC62D 0%, #FFD50072 100%, #C3BD0D 100%) 0 0 no-repeat padding-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container{
+    justify-content: center;
+    justify-items: center;
+}
+
+
+.logo{
+    margin: 2em;
+}
+
+
+.button {
+    display: inline-flex;
+    height: 4em;
+    border: 0.02em solid #707070;
+    color: #BFC0C0;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: .8em;
+    letter-spacing: 1.5em;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 2em;
+}
+
+a {
+    color: #707070;
+    text-decoration: none;
+    letter-spacing: 0.25em;
+}
+
+#button-6 {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    align-items: center;
+}
+
+#button-6 a {
+    position: relative;
+    transition: all .45s ease-Out;
+}
+
+#spin {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    left: 4.375em;
+    top: 1.250em;
+    transform: rotate(0deg);
+    background: none;
+    position: absolute;
+    transition: all .5s ease-Out;
+}
+
+#button-6:hover #spin {
+    width: 200%;
+    height: 500%;
+    opacity: 0.7;
+    left: -00em;
+    top: -0.1em;
+    background: #707070;
+    transform: rotate(180deg);
+}
+
+#button-6:hover a {
+    color: #707070;
+}
+
+body {
+    margin: 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+body > div {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 4em;
+}
+
+@media screen and (max-width: 480px), screen and(max-device-width: 480px) {
+
+    body > div {
+        height: auto;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        max-height: 20em;
+        max-width: 20em;
+    }
+
+}
+
+.input {
+    background: transparent;
+    grid: none;
+    border: none;
+    padding: 1em;
+    border-bottom: 0.01em solid grey;
+    margin: 1em;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font: normal normal 300 1.625em/2.25em Open Sans;
+    letter-spacing: 0;
+    color: #707070;
+    opacity: 1;
+}
+
+.custom-login{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    margin-top: 2em;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.margin{
+    margin-right: 2em;
+}
