@@ -13,14 +13,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-
-}
-
-.login-container{
-    justify-content: center;
-    justify-items: center;
-    margin: 1em;
 }
 
 
@@ -112,7 +104,7 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 4em;
+    margin: 1em;
 }
 
 @media screen and (max-width: 480px), screen and(max-device-width: 480px) {
@@ -137,7 +129,10 @@ form {
     padding: 1em;
     border-bottom: 0.01em solid grey;
     margin: 1em;
+    padding-inline: 4em;
+    text-align: center;
 }
+
 
 .text {
     display: flex;
@@ -150,16 +145,27 @@ form {
     opacity: 1;
 }
 
-.custom-login{
-    display: flex;
-    flex-direction: row;
+.display-flex{
+    display:flex;
+    flex-direction: column;
     justify-content: center;
-    text-align: center;
-    margin-top: 2em;
-    margin-left: 2em;
-    margin-right: 2em;
 }
 
-.margin{
-    margin-right: 2em;
+.wrong{
+    color: red;
+    text-align: center;
+}
+
+.forgot-password{
+    border: none;
+    background: none transparent;
+}
+
+.forgot-password-button{
+    display: flex;
+    justify-content: center;
+}
+
+ul {
+    list-style-type: none;
 }
