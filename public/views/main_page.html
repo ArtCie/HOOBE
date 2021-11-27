@@ -5,50 +5,63 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="../css/email.css">
-    <link rel="stylesheet" type="text/css" href="../css/main_page.css">
+    <link rel="stylesheet" type="text/css" href="public/css/email.css">
+    <link rel="stylesheet" type="text/css" href="public/css/main_page.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Document</title>
     <script src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
+    <script src="public/js/initFile.js"></script>
 </head>
 <body>
 <div class="main">
   <nav>
       <ul>
           <li>
-              <img alt="logo" src="../img/logo.svg">
+              <img alt="logo" src="public/img/logo.svg">
           </li>
           <li>
-              <a href="#">
-              <i class="fas fa-filter"></i>
-                  Filter
-                  <span class="i material-icons">
-                        expand_more
-                  </span>
-              </a>
+              <div class="dropdown">
+                  <a href="#" class="dropbtn">
+                  <i class="fas fa-filter "></i>
+                      Filter
+                      <span class="i material-icons">
+                            expand_more
+                      </span>
+                  </a>
+                      <div class="dropdown-content">
+                          <a href="#">Bolt</a>
+                          <a href="#">Lime</a>
+                          <a href="#">Tier</a>
+                          <a href="#">Panek</a>
+                          <a href="#">Private Vehicles</a>
+                      </div>
+              </div>
           </li>
           <li>
-              <a href="#">
+              <a href="#" class="dropbtn">
                 <i class="fas fa-percent"></i>
                 Discounts
               </a>
           </li>
           <li>
-              <a href="#">
+              <a href="#" class="dropbtn">
                 <i class="fas fa-car"></i>
                 Rent your vehicle
               </a>
           </li>
-
       </ul>
   </nav>
-    <div>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2561.321404905632!2d19.935908715663487!3d50.0615421794236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47165b0dfff14b31%3A0x125f4ff725e62539!2zUnluZWsgR8WCw7N3bnksIDMxLTA0MiBLcmFrw7N3!5e0!3m2!1spl!2spl!4v1636299957545!5m2!1spl!2spl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <div class="map-wrapper">
     </div>
+    <div id="map"></div>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoR-bTNSckAUS-EwelCX0p5_vLaQC3jsg&map_ids=f5a8682e636f2b1d&callback=initMap"
+            async
+    ></script>
   <nav class="bottom">
       <ul>
           <li>
-              <a class="line" href="#">
+              <a class="line" href="#" >
                   <span class="material-icons">
                         settings
                     </span>
