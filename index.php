@@ -12,5 +12,6 @@ Router::get('main_page', 'DefaultController');
 Router::get('discounts', 'DefaultController');
 Router::get('rent_vehicle', 'DefaultController');
 Router::get('registration', 'DefaultController');
+Router::get('settings', 'DefaultController');
 
 Router::run($path);

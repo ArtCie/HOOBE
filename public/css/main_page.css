@@ -171,3 +171,27 @@ span.material-icons{
     font: normal normal 300 1.625em/2.25em Open Sans;
     color: #707070;
 }
+
+.all_settings{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 75vh;
+}
+
+.all_settings * {
+    font-size: 1.1vw;
+
+}
+
+.edit_vehicles{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 20vh;
+}
+
+.thrash{
+    color: red;
+}
