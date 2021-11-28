@@ -8,6 +8,10 @@ class DefaultController extends AppController
         $this->render('login');
     }
 
+    public function registration(){
+        $this->render('registration');
+    }
+
     public function email(){
         $adi = 'adi';
         $this->render('email');
@@ -19,5 +23,9 @@ class DefaultController extends AppController
 
     public function discounts(){
         $this->render('discounts');
+    }
+
+    public function rent_vehicle(){
+        $this->render('rent_vehicle');
     }
 }
