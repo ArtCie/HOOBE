@@ -1,12 +1,17 @@
 <?php
 
     require_once('src/controller/DefaultController.php');
+    require_once 'src/controller/SecurityController.php';
 
     class Router {
 
         public static $routes;
 
         public static function get($url, $view){
+            self::$routes[$url] = $view;
+        }
+
+        public static function post($url, $view) {
             self::$routes[$url] = $view;
         }
 

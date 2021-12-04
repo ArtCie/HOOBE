@@ -16,7 +16,7 @@
     <div class="logo">
         <img src="public/img/logo.svg" alt="logo">
     </div>
-    <form>
+    <form action="login" method="POST">
         <div class="text">
             Long time no see!
         </div>
@@ -28,7 +28,7 @@
 
         <div class="button button-6">
             <div class="spin"></div>
-            <a href="#">Next</a>
+            <button type="submit">Next</button>
         </div>
     </form>
   </div>
