@@ -17,15 +17,20 @@
             <img src="public/img/logo.svg" alt="logo">
         </div>
         <div class="login-container">
-            <form class="login-container">
+            <form class="login-container" action="email" method="POST">
                 <div class="text">
-                    Hey! Your first time? ;)
+                    Hey! Your first time? ;))
                 </div>
-                <input class="input" name="login" placeholder="Enter email address" type="text">
+                <div class="message-display">
+                    <?php if(isset($message)){
+                        echo $message;
+                    } ?>
+                </div>
+                <input class="input" name="email" placeholder="Enter email address" type="text">
 
                 <div class="button button-6">
                     <div class="spin"></div>
-                    <a href="#">Next</a>
+                    <button>Next</button>
                 </div>
 
                 <div class="text">

@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="public/css/main_page.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>HOOBE</title>
-    <script src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
-    <script src="public/js/initFile.js"></script>
+    <script async src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
+    <script async src="public/js/initFile.js"></script>
 </head>
 <body>
 <div class="main">

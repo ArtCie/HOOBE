@@ -164,3 +164,14 @@ form {
 .margin{
     margin-right: 2em;
 }
+
+.message-display{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font: normal normal 300 1.625em/2.25em 'Open Sans';
+    letter-spacing: 0;
+    color: red;
+    opacity: 1;
+}

@@ -11,8 +11,9 @@ Router::get('login', 'DefaultController');
 Router::get('main_page', 'DefaultController');
 Router::get('discounts', 'DefaultController');
 Router::get('rent_vehicle', 'DefaultController');
-Router::get('registration', 'DefaultController');
+Router::get('registration', 'RegistrationController');
 Router::get('settings', 'DefaultController');
 Router::post('login', 'SecurityController');
+Router::post('email', 'EmailValidController');
 
 Router::run($path);

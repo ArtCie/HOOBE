@@ -163,11 +163,15 @@ input{
     display:flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
 }
 
 .wrong{
     color: red;
-    text-align: center;
+}
+
+.correct{
+    color: green;
 }
 
 .forgot-password{
@@ -196,4 +200,23 @@ button, input[type="submit"], input[type="reset"] {
     font: inherit;
     cursor: pointer;
     outline: inherit;
+}
+
+.message-display{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font: normal normal 300 1.625em/2.25em 'Open Sans';
+    letter-spacing: 0;
+    color: red;
+    opacity: 1;
+}
+
+.opacity_none{
+    opacity: 0;
+}
+
+.opacity_full{
+    opacity: 1;
 }
