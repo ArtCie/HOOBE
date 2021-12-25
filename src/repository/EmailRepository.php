@@ -9,13 +9,13 @@ class EmailRepository extends Repository
     public function checkIfUserExist(string $email): ?int
     {
         $stmt = $this->database->connect()->prepare('
-            SELECT 1 FROM public.users WHERE email = :email
+            SELECT 1 as result FROM public.users WHERE email = :email
         ');
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $result[0];
+        return $result["result"];
     }
 }

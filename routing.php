@@ -1,7 +1,7 @@
 <?php
 
     require_once('src/controller/DefaultController.php');
-    require_once 'src/controller/SecurityController.php';
+    require_once 'src/controller/LoginController.php';
     require_once 'src/controller/EmailValidController.php';
     require_once 'src/controller/RegistrationController.php';
 

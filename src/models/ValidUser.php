@@ -1,12 +1,12 @@
 <?php
 
-class RegistrationUser {
+class ValidUser {
     private $email;
     private $password;
 
     public function __construct(
-        string $password,
-        string $email
+        string $email,
+        string $password
     ) {
         $this->email = $email;
         $this->password = $password;

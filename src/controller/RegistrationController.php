@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once 'AppController.php';
-require_once __DIR__ . '/../models/RegistrationUser.php';
+require_once __DIR__ . '/../models/ValidUser.php';
 require_once __DIR__ . '/../repository/RegisterRepository.php';
 
 class RegistrationController extends AppController
@@ -12,7 +12,6 @@ class RegistrationController extends AppController
     {
         parent::__construct();
 
-        session_start();
         $this->registerRepository = new RegisterRepository();
     }
 
@@ -34,8 +33,21 @@ class RegistrationController extends AppController
     }
 
     public function hash_password(string $password){
-        $salt = random_bytes(64);
-        $hashed_salt = password_hash($salt, PASSWORD_BCRYPT);
-        return [password_hash($password . $hashed_salt, PASSWORD_BCRYPT), $hashed_salt];
+        $salt = $this->generate_salt();
+        $options = [
+            'salt' => $salt
+        ];
+        return [password_hash($password, PASSWORD_BCRYPT, $options), $salt];
+    }
+
+    function generate_salt($length = 64): string
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-+={}[];:"<>?/.,`~|\'\\';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }

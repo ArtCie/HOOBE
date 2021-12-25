@@ -19,6 +19,7 @@ class EmailValidController extends AppController {
     public function email()
     {
         $email = $_POST['email'];
+        $_SESSION["email"] = $email;
 
         if($this->isGet()){
             return $this->render('email');
@@ -30,11 +31,10 @@ class EmailValidController extends AppController {
 
         $is_valid = $this->emailRepository->checkIfUserExist($email);
         if(!$is_valid) {
-            $_SESSION["email"] = $email;
             return $this->redirect('registration');
         }
 
-        return $this->redirect('main_page');
+        return $this->redirect('login');
     }
 
     public function checkEmailAddress(string $email){
