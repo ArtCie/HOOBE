@@ -27,7 +27,11 @@ class RegistrationController extends AppController
 
         $insert_timestamp =  gmdate("Y/m/d H:i:s");
 
-        $this->registerRepository->registerUser($email, $hashed_password, $hashed_salt, "1", $insert_timestamp);
+        $id = $this->registerRepository->registerUser($email, $hashed_password, $hashed_salt, "1", $insert_timestamp);
+
+        $_SESSION["user_id"] = $id;
+
+        $this->registerRepository->registerPreferences($id);
 
         return $this->redirect('main_page');
     }

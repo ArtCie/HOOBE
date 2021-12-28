@@ -29,11 +29,12 @@ class EmailValidController extends AppController {
             return $this->render('email', ['message'=>'This email doesn\'t make sense XD']);
         }
 
-        $is_valid = $this->emailRepository->checkIfUserExist($email);
-        if(!$is_valid) {
+        $user_id = $this->emailRepository->checkIfUserExist($email);
+        if(!$user_id) {
             return $this->redirect('registration');
         }
 
+        $_SESSION["user_id"] = $user_id;
         return $this->redirect('login');
     }
 

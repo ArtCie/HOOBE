@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>HOOBE</title>
     <script async src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
-    <script async src="public/js/initFile.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script async src="public/js/initFile.js?87"></script>
 </head>
 <body>
 <div class="main">

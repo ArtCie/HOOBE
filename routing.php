@@ -4,6 +4,7 @@
     require_once 'src/controller/LoginController.php';
     require_once 'src/controller/EmailValidController.php';
     require_once 'src/controller/RegistrationController.php';
+    require_once 'src/controller/MapController.php';
 
     class Router {
 

@@ -13,7 +13,6 @@ class DefaultController extends AppController
     }
 
     public function email(){
-        $adi = 'adi';
         $this->render('email');
     }
 

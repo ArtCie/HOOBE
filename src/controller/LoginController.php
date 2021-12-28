@@ -27,6 +27,7 @@ class LoginController extends AppController {
 
         $user = new ValidUser($email, $password);
 
+
         if($this->valid_password($user)){
             $this->redirect('main_page');
         }
