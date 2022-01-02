@@ -12,8 +12,9 @@
     <title>HOOBE</title>
     <script async src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="public/js/initFile.js?69"></script>
+    <script src="public/js/initFile.js?1"></script>
     <script src="public/js/checkFilters.js?78"></script>
+    <script src="public/js/logout.js"></script>
 </head>
 <body>
 
@@ -107,12 +108,12 @@
           </li>
 
           <li>
-              <a class="line" href="#">
+              <button class="line" onclick="logout()">
                 <span class="material-icons">
                         logout
                 </span>
                   Log out
-              </a>
+              </button>
           </li>
       </ul>
   </nav>

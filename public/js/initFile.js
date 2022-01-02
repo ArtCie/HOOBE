@@ -13,6 +13,7 @@ function showPosition(position) {
             data: data,
             type: 'get',
             success: function (response) {
+                console.log(response);
                 putMarkers(JSON.parse(response));
             }
         });

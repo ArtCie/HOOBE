@@ -17,7 +17,13 @@ class MapController extends AppController
 
     public function main_page()
     {
-        if($this->isPut()){
+        if(!$_SESSION){
+            $this->render('email');
+        }
+        else if($this->isPost()){
+            $this->logout();
+        }
+        else if($this->isPut()){
             $data = json_decode(file_get_contents('php://input'), true);
             $this->update_filters($data);
         }
@@ -46,4 +52,8 @@ class MapController extends AppController
         $this->FilterRepository->updateFilters($user_id, $data);
     }
 
+    public function logout(){
+        session_destroy();
+        $this->render('email');
+    }
 }

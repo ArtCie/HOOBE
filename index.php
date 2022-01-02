@@ -8,7 +8,6 @@ $path = parse_url($path, PHP_URL_PATH);
 Router::get('', 'DefaultController');
 Router::get('email', 'DefaultController');
 Router::get('login', 'DefaultController');
-//Router::get('main_page', 'DefaultController');
 Router::get('main_page', 'MapController');
 Router::get('discounts', 'DefaultController');
 Router::get('rent_vehicle', 'DefaultController');
