@@ -26,6 +26,11 @@ class AppController
         return $this->request === 'POST';
     }
 
+    protected function isPut(): bool
+    {
+        return $this->request === 'PUT';
+    }
+
     protected function render(string $template = null, array $variables = [])
     {
         $templatePath = 'public/views/' . $template . '.php';

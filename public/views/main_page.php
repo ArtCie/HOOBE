@@ -7,13 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="public/css/email.css">
     <link rel="stylesheet" type="text/css" href="public/css/main_page.css">
+    <link rel="stylesheet" type="text/css" href="public/css/toggle.css?2">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>HOOBE</title>
     <script async src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script async src="public/js/initFile.js?87"></script>
+    <script src="public/js/initFile.js?69"></script>
+    <script src="public/js/checkFilters.js?78"></script>
 </head>
 <body>
+
 <div class="main">
   <nav>
       <ul>
@@ -30,12 +33,45 @@
                       </span>
                   </a>
                       <div class="dropdown-content">
-                          <a href="#">Bolt</a>
-                          <a href="#">Lime</a>
-                          <a href="#">Tier</a>
-                          <a href="#">Panek</a>
-                          <a href="#">Private Vehicles</a>
+                          <div class="toggle_text">
+                              Bolt
+                              <input type="checkbox" id="bolt_box" onclick="put_filters(); "/>
+                              <div>
+                                  <label class="bolt_height" for="bolt_box"></label>
+                              </div>
+                          </div>
+                          <div class="toggle_text">
+                              Lime
+                              <input type="checkbox" id="lime_box" onclick="put_filters()"/>
+                              <div>
+                                  <label class="lime_height" for="lime_box"></label>
+                              </div>
+                          </div>
+                          <div class="toggle_text">
+                              Tier
+                              <input type="checkbox" id="tier_box" onclick="put_filters()"/>
+                              <div>
+                                  <label class="tier_height" for="tier_box"></label>
+                              </div>
+                          </div>
+                          <div class="toggle_text">
+                              Panek
+                              <input type="checkbox" id="panek_box" onclick="put_filters()"/>
+                              <div>
+                                  <label class="panek_height" for="panek_box"></label>
+                              </div>
+                          </div>
+                          <div class="toggle_text">
+                              Private vehicles
+                              <input type="checkbox" id="private_vehicles_box" onclick="put_filters()"/>
+                              <div>
+                                  <label class="private_vehicles_height" for="private_vehicles_box"></label>
+                              </div>
+                          </div>
                       </div>
+                  <script type="text/javascript" async>
+                      load_filters()
+                  </script>
               </div>
           </li>
           <li>

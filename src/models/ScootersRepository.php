@@ -29,13 +29,15 @@ class ScootersRepository
         ];
     }
 
-    public function get_all_scooters(): array
+    public function get_all_scooters($user_filters): array
     {
         $data = [];
         foreach ($this->scooter_repository as $key => $value) {
-            $url = $value->prepare_url($this->get_coordinates());
-            $value->send_request($url);
-            $data[$key] = $value->get_data();
+            if($user_filters[strtolower($key)] === true) {
+                $url = $value->prepare_url($this->get_coordinates());
+                $value->send_request($url);
+                $data[$key] = $value->get_data();
+            }
         }
         return $data;
     }
