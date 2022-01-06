@@ -15,5 +15,8 @@ Router::get('registration', 'RegistrationController');
 Router::get('settings', 'DefaultController');
 Router::post('login', 'LoginController');
 Router::post('email', 'EmailValidController');
+Router::get('get_settings', 'SettingsController');
+Router::post('update_settings', 'SettingsController');
+Router::post('save_vehicle', 'RentalController');
 
 Router::run($path);

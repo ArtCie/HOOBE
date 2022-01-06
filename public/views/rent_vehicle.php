@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <title>Rent Vehicle</title>
   <script src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
+  <script src="public/js/validRentalDetails.js"></script>
 </head>
 <body>
 <div class="main">
@@ -57,39 +58,69 @@
   <div class="rent-car-details">
     <div class="renting_details">
       <div class="header">Renting Details</div>
+        <div class="errors"><pre></pre></div>
       <ul>
         <li>
-          <div class="text">Full Name</div>
-          <input class="input" name="full_name" placeholder="Enter full name" type="text">
+          <div class="text">First Name</div>
+          <input id="first_name" class="input" name="first_name" placeholder="Enter first name" type="text">
         </li>
         <li>
-          <div class="text">Address</div>
-          <input class="input" name="address" placeholder="Enter address" type="text">
+          <div class="text">Last Name</div>
+          <input id="last_name" class="input" name="last_name" placeholder="Enter last name" type="text">
+        </li>
+        <li class="extend-width">
+            <div class="address">
+                <div class="double-row">
+                    <div class="text left">Address</div>
+                    <input id="address" class="input double-row" name="address" placeholder="Enter address" type="text">
+                </div>
+                <div class="double-row">
+                    <div class="text left">Address Number</div>
+                    <input id="address_number" class="input double-row" name="address_number" placeholder="Enter address number" type="text">
+                </div>
+            </div>
         </li>
         <li>
           <div class="text">Country</div>
-          <input class="input" name="country" placeholder="Choose country" type="text">
+          <input id="country" class="input" name="country" placeholder="Choose country" type="text">
         </li>
-        <li>
-          <div class="text">City</div>
-          <input class="input" name="city" placeholder="Enter city" type="text">
+        <li class="extend-width">
+            <div class="address">
+                <div class="double-row">
+                    <div class="text left">City</div>
+                    <input id="city" class="input double-row" name="city" placeholder="Enter city" type="text">
+                </div>
+                <div class="double-row">
+                    <div class="text left">Postal Code</div>
+                    <input id="postal_code" class="input double-row" name="city" placeholder="  -   " type="text">
+                </div>
+            </div>
         </li>
       </ul>
     </div>
     <div class="vehicle_details">
       <div class="header">Vehicle Details</div>
+        <div class="errors-vehicle"><pre></pre></div>
       <ul>
         <li>
           <div class="text">Vehicle type</div>
-          <input class="input" name="vehicle_type" placeholder="Choose vehicle type" type="text">
+          <input id="vehicle_type" class="input" name="vehicle_type" placeholder="Choose vehicle type" type="text">
+        </li>
+        <li class="extend-width">
+            <div class="address">
+                <div class="double-row">
+                    <div class="text left">Vehicle name</div>
+                    <input id="vehicle_name" class="input double-row" name="vehicle_name" placeholder="Enter full vehicle name" type="text">
+                </div>
+                <div class="double-row">
+                    <div class="text left">Production year</div>
+                    <input id="production_year" class="input double-row" name="production_year" placeholder="Choose year" type="text">
+                </div>
+            </div>
         </li>
         <li>
-          <div class="text">Vehicle name</div>
-          <input class="input" name="vehicle_name" placeholder="Enter full vehicle name" type="text">
-        </li>
-        <li>
-          <div class="text">Production year</div>
-          <input class="input" name="production_year" placeholder="Choose year of production" type="text">
+          <div class="text">Last Technical Review Date</div>
+            <input id="last_technical_review_date" class="input" name="last_technical_review_date" placeholder="Choose date" type="date">
         </li>
         <li id="upload">
           <div id="seperate_id">
@@ -104,21 +135,26 @@
       </ul>
     </div>
     <div class="rental_details">
+        <div class="errors-rental-details"><pre></pre></div>
       <div class="header">Rental Details</div>
       <ul>
+          <li>
+              <div class="text">Rent From</div>
+              <input id="rent_from" class="input" name="rent_from" placeholder="Choose rental period" type="date">
+          </li>
         <li>
-          <div class="text">Rental Period</div>
-          <input class="input" name="rental_period" placeholder="Choose rental period" type="date">
+          <div class="text">Rental Until</div>
+          <input id="rent_to" class="input" name="rental_until" placeholder="Choose rental period" type="date">
         </li>
         <li>
           <div class="text">Price</div>
-          <input class="input" name="price" placeholder="Enter price" type="text">
+          <input id="price" class="input" name="price" placeholder="Enter price" type="text">
         </li>
         <li>
           <div class="text">Is negotiable?</div>
           <label class="label">
             <div class="toggle">
-              <input class="toggle-state" type="checkbox" name="check" value="check" />
+              <input id = "is_negotiable" class="toggle-state" type="checkbox" name="check" value="check" />
               <div class="indicator"></div>
             </div>
           </label>
@@ -127,7 +163,7 @@
           <div class="add-vehicle">
           <div class="button button-6">
             <div class="spin"></div>
-            <a href="#">Add vehicle</a>
+            <button onclick="validRentalDetails()">Add vehicle</button>
           </div>
           </div>
         </li>
