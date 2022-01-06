@@ -92,9 +92,9 @@
     height: 55vh;
     padding: 1vh 0 1vh 0;
     margin-block-start: 0;
-    margin-block-end: 1em;
-    margin-inline-start: 1em;
-    margin-inline-end: 1em;
+    margin-block-end: 1vh;
+    margin-inline-start: 1vh;
+    margin-inline-end: 1vh;
     padding-inline-start: 0;
 }
 
@@ -129,9 +129,19 @@ li .button{
 
 
 .header{
-    padding: 0 2em 2em 2em;
+    padding: 0 0 0 0;
+    margin-left: 1vh;
     font: normal normal 300 1.625em/2.25em Open Sans;
     color: #707070;
+    text-align: left;
+}
+
+.errors{
+    margin-left: 1vh;
+    padding: 0 0 1em 0;
+    font: normal normal 300 1em/1em Open Sans;
+    color: #707070;
+    text-align: left;
 }
 
 .dropbtn {
@@ -189,4 +199,23 @@ li .button{
 }
 .domcia {
     justify-content: end;
+}
+
+.address{
+    display: flex;
+    justify-content: space-between;
+}
+
+.double-row{
+    padding: 0 0 0 0;
+    width: 10em;
+    margin-left: 0;
+}
+
+.left{
+    text-align: inherit;
+}
+
+.extend-width{
+    width: 100%;
 }

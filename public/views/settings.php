@@ -12,8 +12,12 @@
   <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
   <title>Settings</title>
   <script src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
+    <script src="public/js/setSettingValues.js"></script>
 </head>
 <body>
+<script type="text/javascript">
+    initSettings();
+</script>
 <div class="main">
   <nav>
     <ul>
@@ -54,6 +58,7 @@
   </nav>
   <div class="map-wrapper">
   </div>
+    <form action="update_settings" method="POST">
   <div class="rent-car-details">
     <div class="edit-vehicles-details">
       <div class="header">Vehicles</div>
@@ -76,7 +81,7 @@
           <div class="add-vehicle">
             <div class="button button-6">
               <div class="spin"></div>
-              <a href="#">Save changes</a>
+              <button type="submit">Save changes</button>
             </div>
           </div>
          </li>
@@ -91,66 +96,19 @@
         </li>
         <li>
           <div class="text">Date of birth</div>
-          <input class="input" name="birth_date" placeholder="21/37/2137" type="date">
+
+            <input type="text" class="input" name="birthday" placeholder="MM/DD/YYYY"
+                   onfocus="(this.type='date')"
+                   onblur="(this.type='text')">
         </li>
         <li>
           <div class="text">Password</div>
-          <input class="input" name="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679; tu se daj len" type="password">
+          <input class="input" name="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" type="password">
         </li>
       </ul>
     </div>
-    <div class="rental_details">
-      <div class="header">Preferences</div>
-      <ul>
-        <li class="toggles">
-          <div class="text domcia">Bolt</div>
-          <label class="label">
-            <div class="toggle">
-              <input class="toggle-state" type="checkbox" name="check" value="check" />
-              <div class="indicator"></div>
-            </div>
-          </label>
-        </li>
-        <li class="toggles">
-          <div class="text domcia">Lime</div>
-          <label class="label">
-            <div class="toggle">
-              <input class="toggle-state" type="checkbox" name="check" value="check" />
-              <div class="indicator"></div>
-            </div>
-          </label>
-        </li>
-        <li class="toggles">
-          <div class="text domcia">Tier</div>
-          <label class="label">
-            <div class="toggle">
-              <input class="toggle-state" type="checkbox" name="check" value="check" />
-              <div class="indicator"></div>
-            </div>
-          </label>
-        </li>
-        <li class="toggles">
-          <div class="text domcia">Panek</div>
-          <label class="label">
-            <div class="toggle">
-              <input class="toggle-state" type="checkbox" name="check" value="check" />
-              <div class="indicator"></div>
-            </div>
-          </label>
-        </li>
-        <li class="toggles">
-          <div class="text">Private Vehicles</div>
-          <label class="label">
-            <div class="toggle">
-              <input class="toggle-state" type="checkbox" name="check" value="check" />
-              <div class="indicator"></div>
-            </div>
-          </label>
-        </li>
-      </ul>
-    </div>
-
   </div>
+    </form>
 
 
   <nav id="bottom-default">
