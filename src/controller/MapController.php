@@ -33,7 +33,7 @@ class MapController extends AppController
         else if (isset($_GET['latitude'])) {
             $user_filters = $this->get_user_filters();
             $scooters_repository = new ScootersRepository((float) $_GET['latitude'], (float) $_GET['longitude']);
-            $scooters = $scooters_repository->get_all_scooters($user_filters);
+            $scooters = $scooters_repository->get_all_vehicles($user_filters);
             echo json_encode($scooters);
         }
         else {
