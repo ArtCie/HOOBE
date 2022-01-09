@@ -9,7 +9,7 @@ Router::get('', 'DefaultController');
 Router::get('email', 'DefaultController');
 Router::get('login', 'DefaultController');
 Router::get('main_page', 'MapController');
-Router::get('discounts', 'DefaultController');
+Router::get('discounts', 'ArticlesController');
 Router::get('rent_vehicle', 'DefaultController');
 Router::get('registration', 'RegistrationController');
 Router::get('settings', 'DefaultController');
@@ -18,5 +18,8 @@ Router::post('email', 'EmailValidController');
 Router::get('get_settings', 'SettingsController');
 Router::post('update_settings', 'SettingsController');
 Router::post('save_vehicle', 'RentalController');
+Router::get('article', 'ArticlesController');
+Router::put('update_like', 'ArticlesController');
+Router::get('check_like', 'ArticlesController');
 
 Router::run($path);

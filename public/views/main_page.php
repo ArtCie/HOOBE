@@ -82,10 +82,12 @@
               </a>
           </li>
           <li>
-              <a href="#" class="dropbtn">
-                <i class="fas fa-car"></i>
-                Rent your vehicle
-              </a>
+              <form class="login-container" action="rent_vehicle" method="GET">
+                  <button type="submit" class="dropbtn">
+                    <i class="fas fa-car"></i>
+                    Rent your vehicle
+                  </button>
+              </form>
           </li>
       </ul>
   </nav>

@@ -1,9 +1,7 @@
 function validRentalDetails(){
-    console.log("APUD");
     let rentingDetails = validRentingDetails();
     let vehicleDetails = validVehicleDetails();
     let rentalDetails = validRentalDetail();
-    console.log(typeof rentingDetails);
     if(!rentingDetails["errors"] && !vehicleDetails["errors"] && !rentalDetails["errors"]){
         delete rentingDetails["errors"];
         delete vehicleDetails["errors"];
@@ -14,7 +12,6 @@ function validRentalDetails(){
             "vehicleDetails": vehicleDetails,
             "rentalDetails": rentalDetails
         }
-        console.log(JSON.stringify(data));
         fetch("/save_vehicle", {
             method: "POST",
             headers: {
@@ -22,10 +19,10 @@ function validRentalDetails(){
             },
             body: JSON.stringify(data)
         }).then(function (response) {
-            // return response.json();
             return response;
         }).then(function (response) {
-            console.log(response)
+            console.log(response);
+            window.location.replace(window.location.protocol + "//" + window.location.host + '/main_page');
         });
     }
 }
@@ -235,11 +232,9 @@ function validRentalDetail(){
     let errors = [];
 
     let rentFrom = document.getElementById("rent_from");
-    console.log(rentFrom);
     let rentFromDate = validDate(rentFrom, errors);
 
     let rentTo = document.getElementById("rent_to");
-    console.log(rentTo);
     let rentToDate = validDate(rentTo, errors);
 
     validDates(rentFrom, rentTo);
@@ -265,7 +260,6 @@ function validRentalDetail(){
 
 function validDate(date, errors) {
     let dateObj = Date.parse(date.value);
-    console.log(dateObj);
     let todayDate = new Date();
     let dateDiffDays = Math.floor((todayDate - dateObj) / (1000*60*60*24))
     if(dateDiffDays > 0 ){

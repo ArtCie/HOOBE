@@ -1,0 +1,74 @@
+.heart {
+  width: 100px;
+  height: 100px;
+  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat 0 0;
+  cursor: pointer;
+  transition: background-position 1s steps(28);
+  transition-duration: 0s;
+}
+.heart.is-active {
+  transition-duration: 1s;
+  background-position: -2800px 0;
+}
+
+#segment-split{
+  display:grid;
+  grid-template-columns: repeat(15, 1fr);
+}
+
+#article{
+  grid-column: span 8;
+}
+
+
+#comments{
+  grid-column: span 4;
+}
+
+.comment-author{
+  font-size: large;
+  margin-bottom: 0.7vh;
+  color: black;
+}
+
+.comment-date{
+  color: #707070;
+  font-size: smaller;
+  margin-bottom: 1.4vh;
+}
+
+.comment-content{
+  margin-bottom: 2.5vh;
+  color: black;
+}
+
+.comment{
+  position: relative;
+  background: rgba(255,255,255,0.7);
+  border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
+  color: white;
+  box-shadow: 20px 20px rgba(0,0,0,.15);
+  transition: all .4s ease;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  margin-bottom: 1em;
+}
+
+.comment:hover {
+  border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
+  box-shadow: 10px 10px rgba(0,0,0,.25);
+}
+
+.resize{
+  color: black;
+  height: 100%;
+  width: 100%;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.submit-button{
+  height: 3em;
+  width: 10em;
+  color: black;
+}

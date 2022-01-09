@@ -32,7 +32,6 @@ class RentalController extends AppController
 
         $this->insertRentalInfo($data, $tenantId, $vehicleId);
 
-
     }
 
     private function insertTenantInfo($data){
@@ -136,8 +135,7 @@ class RentalController extends AppController
 
     private function getTenantId($postalCodeId, $countryId, Tenant $tenant)
     {
-//        $userId = $_SESSION["user_id"];
-        $userId = '14';
+        $userId = $_SESSION["user_id"];
         $data = [
             "firstName" => $tenant->getFirstName(),
             "lastName" => $tenant->getLastName(),
