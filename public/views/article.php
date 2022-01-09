@@ -133,8 +133,8 @@
             </div>
             <h2>Comments</h2>
             <?php if (isset($comments)) {
-                foreach ($comments as $comment): ?>
-                <div class="comment">
+                foreach ($comments as $key=>$comment): ?>
+                <div class="comment" id=<?php echo "comment" . $key?>>
                     <div class="comment-header">
                         <div class="comment-author">
                             <?php echo $comment->getEmail();?>

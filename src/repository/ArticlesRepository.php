@@ -120,4 +120,45 @@ class ArticlesRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function insertComment($userId, $articleId, $comment)
+    {
+        $stmt = $this->database->connect()->prepare('
+            insert into
+                comments
+            (user_id, article_id, content)
+                values
+            (:userId, :articleId, :comment)
+            returning
+                id;
+            ');
+        $stmt->bindParam(':articleId', $articleId, PDO::PARAM_INT);
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC)['id'];
+    }
+
+    public function getCommentData($commentId)
+    {
+        $stmt = $this->database->connect()->prepare('
+            select 
+                   c.insert_timestamp, 
+                   u.email 
+            from 
+                "comments" c 
+            inner join 
+                users u 
+            on 
+                c.user_id = u.id 
+            where 
+                c.id = :id;
+            ');
+        $stmt->bindParam(':id', $commentId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 }

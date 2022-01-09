@@ -98,4 +98,24 @@ class ArticlesController extends AppController {
         }
     }
 
+    /**
+     * @throws Exception
+     */
+    public function publish_comment(){
+        $data = json_decode(file_get_contents('php://input'), true);
+        $articleId = $data["articleId"];
+        $comment = $data["comment"];
+        $userId = $_SESSION["user_id"];
+
+        $commentId = $this->articleRepository->insertComment($userId, $articleId, $comment);
+        $result = $this->articleRepository->getCommentData($commentId);
+        $date = new DateTime($result["insert_timestamp"]);
+        $data = [
+            "email"=>$result["email"],
+            "comment"=>$comment,
+            "insert_timestamp"=>$date->format('d/M/Y h:i:s')
+        ];
+        echo json_encode($data);
+    }
+
 }

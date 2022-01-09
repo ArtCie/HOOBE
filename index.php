@@ -21,5 +21,6 @@ Router::post('save_vehicle', 'RentalController');
 Router::get('article', 'ArticlesController');
 Router::put('update_like', 'ArticlesController');
 Router::get('check_like', 'ArticlesController');
+Router::post('publish_comment', 'ArticlesController');
 
 Router::run($path);
