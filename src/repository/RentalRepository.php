@@ -25,7 +25,7 @@ class RentalRepository extends Repository
 
         $stmt->execute();
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC)["id"];
     }
 
     public function selectVehicleTypeByName($name)
@@ -130,5 +130,21 @@ class RentalRepository extends Repository
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function insertVehiclePhoto($id, $name)
+    {
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO
+                rent_photos
+            (rental_id, name)
+            VALUES
+            (:rental_id, :name)');
+
+        $stmt->bindParam(':rental_id', $id, PDO::PARAM_STR);
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+
+        $stmt->execute();
+    }
+
 
 }

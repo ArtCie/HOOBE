@@ -8,6 +8,8 @@ class PrivateVehiclesRepository extends Repository
     {
         $stmt = $this->database->connect()->prepare("
             select 
+                u.email,
+                r.id,
                 r.rent_from, 
                 r.rent_to, 
                 r.price, 
@@ -39,12 +41,29 @@ class PrivateVehiclesRepository extends Repository
                 city c2 
             on 
                 c2.id = cpc.city_id
+            inner join
+                users u
+            on 
+                u.id = td.user_id
             where 
-                r.is_available = true;
+                r.is_available = true
             ");
 
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getPhotosByRentalId($id)
+    {
+        $stmt = $this->database->connect()->prepare('
+            SELECT name from rent_photos where rental_id = :rental_id;
+        ');
+
+        $stmt->bindParam(':rental_id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchall(PDO::FETCH_ASSOC);
+
     }
 }

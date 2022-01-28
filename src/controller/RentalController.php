@@ -10,9 +10,15 @@ require_once('src/models/RentalDetails.php');
 
 class RentalController extends AppController
 {
+    const MAX_FILE_SIZE = 1024*1024;
+    const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
+    const UPLOAD_DIRECTORY = '/app/public/img/uploads/';
+
+
     private $tenantRepository;
     private $vehicleRepository;
     private $rentalRepository;
+    private $message = [];
 
     public function __construct(){
         parent::__construct();
@@ -23,19 +29,35 @@ class RentalController extends AppController
 
 
     public function save_vehicle(){
-        $content = trim(file_get_contents("php://input"));
-        $data = json_decode($content, true);
+        $tenantId = $this->insertTenantInfo($_POST);
 
-        $tenantId = $this->insertTenantInfo($data);
+        $vehicleId = $this->insertVehicleInfo($_POST, $tenantId);
 
-        $vehicleId = $this->insertVehicleInfo($data, $tenantId);
+        $id = $this->insertRentalInfo($_POST, $tenantId, $vehicleId);
 
-        $this->insertRentalInfo($data, $tenantId, $vehicleId);
+        $this->moveFiles($id);
 
+        $this->render('main_page');
+
+        }
+
+    private function moveFiles($id){
+        $file_count = count($_FILES['file']['name']);
+
+        for( $i=0 ; $i < $file_count ; $i++ ) {
+            $tmpFilePath = $_FILES['file']['tmp_name'][$i];
+            echo $tmpFilePath;
+
+            if ($tmpFilePath != "") {
+                $newFilePath = self::UPLOAD_DIRECTORY.$_FILES['file']['name'][$i];
+                $this->rentalRepository->insertVehiclePhoto($id, $newFilePath);
+                move_uploaded_file($tmpFilePath, $newFilePath);
+            }
+
+        }
     }
-
     private function insertTenantInfo($data){
-        $tenant = $this->getTenant($data["rentingDetails"]);
+        $tenant = $this->getTenant($data);
 
         $city_id = $this->get_city_id($tenant->getCity());
         $postal_code_id = $this->get_postal_code_id($city_id, $tenant->getPostalCode());
@@ -45,7 +67,7 @@ class RentalController extends AppController
     }
 
     private function insertVehicleInfo($data, $tenant_id){
-        $vehicle = $this->getVehicle($data["vehicleDetails"]);
+        $vehicle = $this->getVehicle($data);
 
         $vehicleTypeId = $this->getVehicleTypeId($vehicle->getVehicleType());
         return $this->getVehicleId($tenant_id, $vehicleTypeId, $vehicle);
@@ -54,7 +76,7 @@ class RentalController extends AppController
 
     private function insertRentalInfo($data, $tenantId, $vehicleId)
     {
-        $rental = $this->getRental($data["rentalDetails"]);
+        $rental = $this->getRental($data);
 
         $data = [
             "tenantId" => $tenantId,
@@ -65,7 +87,7 @@ class RentalController extends AppController
             "isNegotiable" => $rental->getIsNegotiable()
         ];
 
-        $this->rentalRepository->insertRental($data);
+        return $this->rentalRepository->insertRental($data);
 
 
     }
@@ -73,33 +95,39 @@ class RentalController extends AppController
     private function getTenant($rentalDetails): Tenant
     {
         return new Tenant(
-            $rentalDetails["firstName"],
-            $rentalDetails["lastName"],
+            $rentalDetails["first_name"],
+            $rentalDetails["last_name"],
             $rentalDetails["address"],
-            $rentalDetails["addressNumber"],
+            $rentalDetails["address_number"],
             $rentalDetails["country"],
             $rentalDetails["city"],
-            $rentalDetails["postalCode"]
+            $rentalDetails["postal_code"]
         );
     }
 
     private function getVehicle($vehicleDetails): Vehicle
     {
         return new Vehicle(
-          $vehicleDetails["vehicleType"],
-          $vehicleDetails["vehicleName"],
-          $vehicleDetails["productionYear"],
-          gmdate('r', (int)$vehicleDetails["lastTechnicalReviewDate"] / 1000)
+          $vehicleDetails["vehicle_type"],
+          $vehicleDetails["vehicle_name"],
+          $vehicleDetails["production_year"],
+          gmdate('r', (int)$vehicleDetails["last_technical_review_date"] / 1000)
         );
     }
 
     private function getRental($rentalDetails): RentalDetails
     {
+        if($rentalDetails["is_negotiable"]){
+           $is_negotiable = false;
+        }
+        else{
+            $is_negotiable = true;
+        }
         return new RentalDetails(
-            gmdate('r', (int)$rentalDetails["rentFrom"] / 1000),
-            gmdate('r', (int)$rentalDetails["rentTo"] / 1000),
+            gmdate('r', (int)$rentalDetails["rent_from"] / 1000),
+            gmdate('r', (int)$rentalDetails["rent_to"] / 1000),
             $rentalDetails["price"],
-            $rentalDetails["isNegotiable"]
+            $is_negotiable
         );
     }
 
@@ -179,5 +207,19 @@ class RentalController extends AppController
         }
 
         return $vehicleId;
+    }
+
+    private function validate(array $file): bool
+    {
+        if ($file['size'] > self::MAX_FILE_SIZE) {
+            $this->message[] = 'File is too large for destination file system.';
+            return false;
+        }
+
+        if (!isset($file['type']) || !in_array($file['type'], self::SUPPORTED_TYPES)) {
+            $this->message[] = 'File type is not supported.';
+            return false;
+        }
+        return true;
     }
 }

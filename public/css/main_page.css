@@ -7,7 +7,7 @@ nav  ul {
     padding: 1em 4em;
 
 }
-li  a {
+li  button{
     font-size: 1.2em;
     letter-spacing: 0.18em;
 }
@@ -87,14 +87,14 @@ span.material-icons{
     z-index: 1;
 }
 
-.dropdown-content a {
+.dropdown-content button {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content button:hover {background-color: #f1f1f1}
 
 .dropdown:hover .dropdown-content {
     display: block;

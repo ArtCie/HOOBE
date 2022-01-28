@@ -1,17 +1,17 @@
 function validRentalDetails(){
-    let rentingDetails = validRentingDetails();
-    let vehicleDetails = validVehicleDetails();
-    let rentalDetails = validRentalDetail();
-    if(!rentingDetails["errors"] && !vehicleDetails["errors"] && !rentalDetails["errors"]){
-        delete rentingDetails["errors"];
-        delete vehicleDetails["errors"];
-        delete rentalDetails["errors"];
-
-        let data = {
-            "rentingDetails": rentingDetails,
-            "vehicleDetails": vehicleDetails,
-            "rentalDetails": rentalDetails
-        }
+    // let rentingDetails = validRentingDetails();
+    // let vehicleDetails = validVehicleDetails();
+    // let rentalDetails = validRentalDetail();
+    // if(!rentingDetails["errors"] && !vehicleDetails["errors"] && !rentalDetails["errors"]){
+    //     delete rentingDetails["errors"];
+    //     delete vehicleDetails["errors"];
+    //     delete rentalDetails["errors"];
+    //
+    //     let data = {
+    //         "rentingDetails": rentingDetails,
+    //         "vehicleDetails": vehicleDetails,
+    //         "rentalDetails": rentalDetails
+    //     }
         fetch("/save_vehicle", {
             method: "POST",
             headers: {
@@ -21,11 +21,11 @@ function validRentalDetails(){
         }).then(function (response) {
             return response;
         }).then(function (response) {
-            console.log(response);
-            window.location.replace(window.location.protocol + "//" + window.location.host + '/main_page');
+            console.log(response.text());
+            // window.location.replace(window.location.protocol + "//" + window.location.host + '/main_page');
         });
     }
-}
+// }
 
 
 function validRentingDetails(){

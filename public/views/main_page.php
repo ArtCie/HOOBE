@@ -76,10 +76,12 @@
               </div>
           </li>
           <li>
-              <a href="#" class="dropbtn">
-                <i class="fas fa-percent"></i>
-                Discounts
-              </a>
+              <form action="discounts" method="POST">
+                  <button href="#" class="dropbtn">
+                    <i class="fas fa-percent"></i>
+                    Discounts
+                  </button>
+              </form>
           </li>
           <li>
               <form class="login-container" action="rent_vehicle" method="GET">
@@ -101,12 +103,14 @@
   <nav class="bottom">
       <ul>
           <li>
-              <a class="line" href="#" >
-                  <span class="material-icons">
-                        settings
-                    </span>
-                  Settings
-              </a>
+              <form action="settings" method="GET">
+                  <button class="line">
+                      <span class="material-icons">
+                            settings
+                        </span>
+                      Settings
+                  </button>
+              </form>
           </li>
 
           <li>

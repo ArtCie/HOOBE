@@ -42,8 +42,16 @@ class ScootersRepository
                 $data["scooters"][$key] = $value->get_data();
             }
             if($user_filters["private_vehicles"] === true){
-                $data["private_vehicles"] = $this->privateVehiclesRepository->selectPrivateVehicles();
+                $data["private_vehicles"] = $this->getPrivateVehicles();
             }
+        }
+        return $data;
+    }
+
+    public function getPrivateVehicles(){
+        $data = $this->privateVehiclesRepository->selectPrivateVehicles();
+        foreach($data as $index=>$vehicle){
+            $data[$index]["photos"] = $this->privateVehiclesRepository->getPhotosByRentalId($vehicle["id"]);
         }
         return $data;
     }

@@ -55,6 +55,7 @@
   </nav>
   <div class="map-wrapper">
   </div>
+    <form action="save_vehicle" method="POST" ENCTYPE="multipart/form-data">
   <div class="rent-car-details">
     <div class="renting_details">
       <div class="header">Renting Details</div>
@@ -92,7 +93,7 @@
                 </div>
                 <div class="double-row">
                     <div class="text left">Postal Code</div>
-                    <input id="postal_code" class="input double-row" name="city" placeholder="  -   " type="text">
+                    <input id="postal_code" class="input double-row" name="postal_code" placeholder="  -   " type="text">
                 </div>
             </div>
         </li>
@@ -126,10 +127,7 @@
           <div id="seperate_id">
             <div class="text">Vehicle photos</div>
             <div class="text">Upload series of photos</div>
-          </div>
-          <div class="button button-6">
-            <div class="spin"></div>
-            <a href="#">Upload</a>
+            <input type="file" name="file[]" multiple="multiple"/>
           </div>
         </li>
       </ul>
@@ -154,7 +152,7 @@
           <div class="text">Is negotiable?</div>
           <label class="label">
             <div class="toggle">
-              <input id = "is_negotiable" class="toggle-state" type="checkbox" name="check" value="check" />
+              <input id = "is_negotiable" class="toggle-state" type="checkbox" name="is_negotiable" value="check" />
               <div class="indicator"></div>
             </div>
           </label>
@@ -163,7 +161,8 @@
           <div class="add-vehicle">
           <div class="button button-6">
             <div class="spin"></div>
-            <button onclick="validRentalDetails()">Add vehicle</button>
+<!--            <button onclick="validRentalDetails()">Add vehicle</button>-->
+              <button type="submit">Add vehicle</button>
           </div>
           </div>
         </li>
@@ -171,7 +170,7 @@
     </div>
 
   </div>
-
+    </form>
 
   <nav id="bottom-default">
     <ul>
