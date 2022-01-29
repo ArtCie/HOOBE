@@ -68,20 +68,24 @@ class VehicleRepository extends Repository
 
     }
 
-    public function selectUserVehiclesName(int $user_id){
+    public function selectUserVehiclesNameAndId(int $user_id){
         $stmt = $this->database->connect()->prepare('
             SELECT 
-                name
+                v.id, v.name
             FROM
-                vehicles
+                vehicles v
+            INNER JOIN
+                tenant_details td
+            ON 
+                td.id = v.tenant_id
             WHERE
-                user_id = :user_id;
+                td.user_id = :user_id;
         ');
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_STR);
 
         $stmt->execute();
 
-
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function insertVehicleType($vehicleTypeName)
@@ -129,6 +133,59 @@ class VehicleRepository extends Repository
 
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC)["id"];
+    }
+
+    public function removeVehicle($userId, $vehicleId)
+    {
+        $stmt = $this->database->connect()->prepare('
+            DELETE FROM
+                rent_photos rp
+            USING
+                rentals r
+            WHERE 
+                r.id = rp.rental_id
+            AND
+                r.vehicle_id = :id
+            ');
+
+        $stmt->bindParam(':id', $vehicleId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $stmt = $this->database->connect()->prepare('
+            DELETE FROM
+                rentals
+            WHERE
+                vehicle_id = :id
+            ');
+
+        $stmt->bindParam(':id', $vehicleId, PDO::PARAM_INT);
+        $stmt->execute();
+
+
+        $stmt = $this->database->connect()->prepare('
+            DELETE FROM
+                vehicles
+            WHERE
+                id = :id
+            RETURNING
+                tenant_id;
+        ');
+
+        $stmt->bindParam(':id', $vehicleId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $tenant_id = $stmt->fetch(PDO::FETCH_ASSOC)["tenant_id"];
+
+        $stmt = $this->database->connect()->prepare('
+            DELETE FROM
+                tenant_details
+            WHERE
+                id = :id
+        ');
+
+        $stmt->bindParam(':id', $tenant_id, PDO::PARAM_INT);
+        $stmt->execute();
+
     }
 
 }

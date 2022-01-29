@@ -12,7 +12,7 @@ Router::get('main_page', 'MapController');
 Router::get('discounts', 'ArticlesController');
 Router::get('rent_vehicle', 'DefaultController');
 Router::get('registration', 'RegistrationController');
-Router::get('settings', 'DefaultController');
+Router::post('settings', 'SettingsController');
 Router::post('login', 'LoginController');
 Router::post('email', 'EmailValidController');
 Router::get('get_settings', 'SettingsController');
@@ -22,5 +22,7 @@ Router::get('article', 'ArticlesController');
 Router::put('update_like', 'ArticlesController');
 Router::get('check_like', 'ArticlesController');
 Router::post('publish_comment', 'ArticlesController');
+Router::post('publish_comment', 'ArticlesController');
+Router::post('remove_vehicle', 'SettingsController');
 
 Router::run($path);

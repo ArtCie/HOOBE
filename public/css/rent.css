@@ -7,6 +7,7 @@
 
 .rent-car-details * {
     font-size: 1.1vw;
+    min-width: max-content;
 
 }
 
