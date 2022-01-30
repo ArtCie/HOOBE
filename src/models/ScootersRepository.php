@@ -3,10 +3,12 @@
 require_once 'src/models/ScootersRepositories/BoltRepository.php';
 require_once 'src/models/ScootersRepositories/TierRepository.php';
 require_once 'src/models/ScootersRepositories/LimeRepository.php';
+require_once 'src/repository/PrivateVehiclesRepository.php';
 
 class ScootersRepository
 {
     private $scooter_repository;
+    private $privateVehiclesRepository;
     private $latitude;
     private $longitude;
 
@@ -17,8 +19,9 @@ class ScootersRepository
         $this->scooter_repository = [
             "Tier" => new TierRepository(),
             "Bolt" => new BoltRepository(),
-            "Lime"=>new LimeRepository()
+            "Lime"=>new LimeRepository(),
         ];
+        $this->privateVehiclesRepository = new PrivateVehiclesRepository();
     }
 
     protected function get_coordinates(): array
@@ -29,15 +32,26 @@ class ScootersRepository
         ];
     }
 
-    public function get_all_scooters($user_filters): array
+    public function get_all_vehicles($user_filters): array
     {
         $data = [];
         foreach ($this->scooter_repository as $key => $value) {
             if($user_filters[strtolower($key)] === true) {
                 $url = $value->prepare_url($this->get_coordinates());
                 $value->send_request($url);
-                $data[$key] = $value->get_data();
+                $data["scooters"][$key] = $value->get_data();
             }
+            if($user_filters["private_vehicles"] === true){
+                $data["private_vehicles"] = $this->getPrivateVehicles();
+            }
+        }
+        return $data;
+    }
+
+    public function getPrivateVehicles(){
+        $data = $this->privateVehiclesRepository->selectPrivateVehicles();
+        foreach($data as $index=>$vehicle){
+            $data[$index]["photos"] = $this->privateVehiclesRepository->getPhotosByRentalId($vehicle["id"]);
         }
         return $data;
     }

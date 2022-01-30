@@ -7,13 +7,14 @@
 
 .rent-car-details * {
     font-size: 1.1vw;
+    min-width: max-content;
 
 }
 
 #upload{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: left;
     align-items: self-end;
 }
 
@@ -113,6 +114,15 @@
 
 li > .text{
     text-align: left;
+    font-family: 'Raleway', sans-serif;
+}
+
+.text{
+    font-family: 'Raleway', sans-serif;
+}
+
+.input{
+    font-family: 'Raleway', sans-serif;
 }
 
 li > .input{
@@ -131,7 +141,8 @@ li .button{
 .header{
     padding: 0 0 0 0;
     margin-left: 1vh;
-    font: normal normal 300 1.625em/2.25em Open Sans;
+    /*font: normal normal 300 1.625em/2.25em Open Sans;*/
+    font-family: 'Raleway', sans-serif;
     color: #707070;
     text-align: left;
 }

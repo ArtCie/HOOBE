@@ -7,6 +7,7 @@
     require_once 'src/controller/MapController.php';
     require_once 'src/controller/SettingsController.php';
     require_once 'src/controller/RentalController.php';
+    require_once 'src/controller/ArticlesController.php';
 
     class Router {
 
@@ -17,6 +18,10 @@
         }
 
         public static function post($url, $view) {
+            self::$routes[$url] = $view;
+        }
+
+        public static function put($url, $view){
             self::$routes[$url] = $view;
         }
 

@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Articles</title>
     <script src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
-    <script src="public/js/initFile.js"></script>
 </head>
 <body>
 <div class="main">
@@ -56,47 +55,68 @@
     </div>
 
     <div id="articles">
-        <a href="#" id="first-box" class="fill">
+        <form id="first-box" class="fill" action="http://localhost:8080/article" method="GET">
+        <input type="hidden" name="article_id" value=<?php if (isset($articles)) {
+            echo $articles[0]->getIndex();
+        }?>>
             <div class="height-fix">
                 <img alt="logo" class="first-jpg" src="public/img/articles/pig.svg">
             </div>
             <div>
+                <button>
                 <div class="header">
-                    Wyglądasz bez brody jak krowa bez ogona!
+                    <?php if (isset($articles)) {
+                            echo $articles[0]->getHeader();
+                    } ?>
                 </div>
                 <div class="description">
-                    Ty patafilu
+                    <?php if (isset($articles)) {
+                        echo $articles[0]->getContent();
+                    } ?>
                 </div>
                 <div class="details">
                 <div class="like-and-comments">
                     <img alt="like" src="public/img/articles/like.svg">
-                    123
+                    <?php if (isset($articles)) {
+                        echo $articles[0]->getLikes();
+                    } ?>
                 </div>
                 <div class="like-and-comments">
                     <img alt="comment" src="public/img/articles/comment.svg">
-                    123
+                    <?php if (isset($articles)) {
+                        echo $articles[0]->getComments();
+                    } ?>
                 </div>
                 </div>
 
+            </button>
             </div>
-        </a>
+        </form>
 
         <a href="#" id="second-box">
             <div id="text">
                 <div class="header change-margin">
-                    Wyglądasz bez brody jak krowa bez ogona!
+                    <?php if (isset($articles)) {
+                        echo $articles[1]->getHeader();
+                    } ?>
                 </div>
                 <div class="description">
-                    Ty patafilu
+                    <?php if (isset($articles)) {
+                        echo $articles[1]->getContent();
+                    } ?>
                 </div>
                 <div class="details">
                     <div class="like-and-comments">
                         <img alt="like" src="public/img/articles/like.svg">
-                        123
+                        <?php if (isset($articles)) {
+                            echo $articles[1]->getLikes();
+                        } ?>
                     </div>
                     <div class="like-and-comments">
                         <img alt="comment" src="public/img/articles/comment.svg">
-                        123
+                        <?php if (isset($articles)) {
+                            echo $articles[1]->getComments();
+                        } ?>
                     </div>
                 </div>
             </div>
@@ -112,19 +132,27 @@
             </div>
             <div>
                 <div class="header">
-                    Ezoteriusz Maximus!
+                    <?php if (isset($articles)) {
+                        echo $articles[2]->getHeader();
+                    } ?>
                 </div>
                 <div class="description">
-                    Ty patafilu
+                    <?php if (isset($articles)) {
+                        echo $articles[2]->getContent();
+                    } ?>
                 </div>
                 <div class="details">
                     <div class="like-and-comments">
                         <img alt="like" src="public/img/articles/like.svg">
-                        123
+                        <?php if (isset($articles)) {
+                            echo $articles[2]->getLikes();
+                        } ?>
                     </div>
                     <div class="like-and-comments">
                         <img alt="comment" src="public/img/articles/comment.svg">
-                        123
+                        <?php if (isset($articles)) {
+                            echo $articles[2]->getComments();
+                        } ?>
                     </div>
                 </div>
 
@@ -136,19 +164,27 @@
             </div>
             <div>
                 <div class="header">
-                    Ezoteriusz Maximus!
+                    <?php if (isset($articles)) {
+                        echo $articles[3]->getHeader();
+                    } ?>
                 </div>
                 <div class="description">
-                    Ty patafilu
+                    <?php if (isset($articles)) {
+                        echo $articles[3]->getContent();
+                    } ?>
                 </div>
                 <div class="details">
                     <div class="like-and-comments">
                         <img alt="like" src="public/img/articles/like.svg">
-                        123
+                        <?php if (isset($articles)) {
+                            echo $articles[3]->getLikes();
+                        } ?>
                     </div>
                     <div class="like-and-comments">
                         <img alt="comment" src="public/img/articles/comment.svg">
-                        123
+                        <?php if (isset($articles)) {
+                            echo $articles[3]->getComments();
+                        } ?>
                     </div>
                 </div>
 
@@ -160,19 +196,27 @@
             </div>
             <div>
                 <div class="header">
-                    Ezoteriusz Maximus!
+                    <?php if (isset($articles)) {
+                        echo $articles[4]->getHeader();
+                    } ?>
                 </div>
                 <div class="description">
-                    Ty patafilu
+                    <?php if (isset($articles)) {
+                        echo $articles[4]->getContent();
+                    } ?>
                 </div>
                 <div class="details">
                     <div class="like-and-comments">
                         <img alt="like" src="public/img/articles/like.svg">
-                        123
+                        <?php if (isset($articles)) {
+                            echo $articles[4]->getLikes();
+                        } ?>
                     </div>
                     <div class="like-and-comments">
                         <img alt="comment" src="public/img/articles/comment.svg">
-                        123
+                        <?php if (isset($articles)) {
+                            echo $articles[4]->getComments();
+                        } ?>
                     </div>
                 </div>
 

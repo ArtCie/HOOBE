@@ -25,7 +25,7 @@ class RentalRepository extends Repository
 
         $stmt->execute();
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC)["id"];
     }
 
     public function selectVehicleTypeByName($name)
@@ -130,5 +130,63 @@ class RentalRepository extends Repository
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function insertVehiclePhoto($id, $name)
+    {
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO
+                rent_photos
+            (rental_id, name)
+            VALUES
+            (:rental_id, :name)');
+
+        $stmt->bindParam(':rental_id', $id, PDO::PARAM_STR);
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+
+        $stmt->execute();
+    }
+
+    public function updateRental(array $data)
+    {
+        $stmt = $this->database->connect()->prepare('
+            UPDATE
+                rentals
+            SET
+                tenant_id = :tenant_id,
+                vehicle_id = :vehicle_id,
+                rent_from = :rent_from,
+                rent_to = :rent_to,
+                price = :price
+            WHERE
+                tenant_id = :tenant_id
+            AND 
+                vehicle_id = :vehicle_id
+            RETURNING
+                id;
+        ');
+        $stmt->bindParam(':tenant_id', $data["tenant_id"], PDO::PARAM_STR);
+        $stmt->bindParam(':vehicle_id', $data["vehicle_id"], PDO::PARAM_STR);
+        $stmt->bindParam(':rent_from', $data["rent_from"], PDO::PARAM_STR);
+        $stmt->bindParam(':rent_to', $data["rent_to"], PDO::PARAM_STR);
+        $stmt->bindParam(':price', $data["price"], PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC)['id'];
+    }
+
+    public function deletePhotos(array $data)
+    {
+        $stmt = $this->database->connect()->prepare('
+            DELETE FROM
+                rent_photos
+            WHERE
+                rental_id = :rental_id
+        ');
+        $stmt->bindParam(':rental_id', $data["rental_id"], PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
+
 
 }

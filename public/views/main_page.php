@@ -22,7 +22,11 @@
   <nav>
       <ul>
           <li>
-              <img alt="logo" src="public/img/logo.svg">
+              <form action="main_page" method="POST">
+                  <button type="submit">
+                    <img alt="logo" src="public/img/logo.svg">
+                  </button>
+              </form>
           </li>
           <li>
               <div class="dropdown">
@@ -76,16 +80,20 @@
               </div>
           </li>
           <li>
-              <a href="#" class="dropbtn">
-                <i class="fas fa-percent"></i>
-                Discounts
-              </a>
+              <form action="discounts" method="POST">
+                  <button href="#" class="dropbtn">
+                    <i class="fas fa-percent"></i>
+                    Discounts
+                  </button>
+              </form>
           </li>
           <li>
-              <a href="#" class="dropbtn">
-                <i class="fas fa-car"></i>
-                Rent your vehicle
-              </a>
+              <form class="login-container" action="rent_vehicle" method="GET">
+                  <button type="submit" class="dropbtn">
+                    <i class="fas fa-car"></i>
+                    Rent your vehicle
+                  </button>
+              </form>
           </li>
       </ul>
   </nav>
@@ -99,12 +107,14 @@
   <nav class="bottom">
       <ul>
           <li>
-              <a class="line" href="#" >
-                  <span class="material-icons">
-                        settings
-                    </span>
-                  Settings
-              </a>
+              <form action="settings" method="GET">
+                  <button class="line">
+                      <span class="material-icons">
+                            settings
+                        </span>
+                      Settings
+                  </button>
+              </form>
           </li>
 
           <li>

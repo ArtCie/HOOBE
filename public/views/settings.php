@@ -13,6 +13,7 @@
   <title>Settings</title>
   <script src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
     <script src="public/js/setSettingValues.js"></script>
+    <script src="public/js/vehicleSettingsManager.js"></script>
 </head>
 <body>
 <script type="text/javascript">
@@ -63,20 +64,23 @@
     <div class="edit-vehicles-details">
       <div class="header">Vehicles</div>
       <ul>
-        <li>
-          <div class="text">Edit vehicles</div>
-          <div class="edit_vehicles">
-            Car Name
-            <div>
-            <a href="#" class="material-icons-outlined">
-              edit_note
-          </a>
-            <a href="#" class="material-icons-outlined thrash">
-              delete
-          </a>
-            </div>
-          </div>
-        </li>
+        <li><div class="text">Edit vehicles</div></li>
+          <?php if (isset($vehicles)) {
+              foreach ($vehicles as $vehicle): ?>
+                  <li>
+                      <div class="edit_vehicles" id='<?php echo "vehicle" . $vehicle["id"];?>'>
+                          <?php echo $vehicle["name"];?>
+                          <div>
+                              <button onclick="editVehicle('<?php echo $vehicle["id"];?>')" class="material-icons-outlined">
+                                  edit_note
+                              </button>
+                              <button onclick="removeVehicle('<?php echo $vehicle["id"];?>')" class="material-icons-outlined thrash">
+                                  delete
+                              </button>
+                          </div>
+                      </div>
+                  </li>
+              <?php   endforeach;} ?>
         <li>
           <div class="add-vehicle">
             <div class="button button-6">
