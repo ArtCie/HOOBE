@@ -45,24 +45,27 @@ class VehicleRepository extends Repository
     }
 
 
-    public function updateVehicle(int $user_id, $data)
+    public function updateVehicle($data, $vehicle_id)
     {
         $stmt = $this->database->connect()->prepare('
-            UPDATE
+            UPDATE 
                 vehicles
-            SET
+            set
+                tenant_id = :tenant_id,
                 vehicle_type_id = :vehicle_type_id,
                 name = :name,
                 production_year = :production_year,
-                last_technical_review_date
-            WHERE
-                id = :id
-            ');
-        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+                last_technical_review_date = :last_technical_review_date
+            where
+                id = :id;
+        ');
+
         $stmt->bindParam(':vehicle_type_id', $data["vehicle_type_id"], PDO::PARAM_STR);
         $stmt->bindParam(':name', $data["name"], PDO::PARAM_STR);
         $stmt->bindParam(':production_year', $data["production_year"], PDO::PARAM_STR);
         $stmt->bindParam(':last_technical_review_date', $data["last_technical_review_date"], PDO::PARAM_STR);
+        $stmt->bindParam(':tenant_id', $data["tenant_id"], PDO::PARAM_INT);
+        $stmt->bindParam(':id', $vehicle_id, PDO::PARAM_INT);
 
         $stmt->execute();
 
@@ -185,6 +188,59 @@ class VehicleRepository extends Repository
 
         $stmt->bindParam(':id', $tenant_id, PDO::PARAM_INT);
         $stmt->execute();
+
+    }
+
+    public function selectVehicleInfo($vehicleId)
+    {
+        $stmt = $this->database->connect()->prepare('
+            select * from vehicleinfo2 where vehicle_id = :id;
+            ');
+
+        $stmt->bindParam(':id', $vehicleId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getTenantByVehicleId($vehicle_id)
+    {
+        $stmt = $this->database->connect()->prepare('
+            select tenant_id from vehicles where id = :vehicle_id
+            ');
+
+        $stmt->bindParam(':vehicle_id', $vehicle_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC)["tenant_id"];
+    }
+
+    public function updateTenant(array $data, $tenantId)
+    {
+        $stmt = $this->database->connect()->prepare('
+            update tenant_details 
+            set
+                first_name = :first_name,
+                last_name = :last_name,
+                street_name = :street_name,
+                address_number = :address_number,
+                postal_code_id = :postal_code_id,
+                country_id = :country_id
+            where
+                id = :tenant_id
+            ');
+
+        $stmt->bindParam(':first_name', $data["first_name"], PDO::PARAM_STR);
+        $stmt->bindParam(':last_name', $data["last_name"], PDO::PARAM_STR);
+        $stmt->bindParam(':street_name', $data["street_name"], PDO::PARAM_STR);
+        $stmt->bindParam(':address_number', $data["address_number"], PDO::PARAM_INT);
+        $stmt->bindParam(':postal_code_id', $data["postal_code_id"], PDO::PARAM_INT);
+        $stmt->bindParam(':country_id', $data["country_id"], PDO::PARAM_INT);
+        $stmt->bindParam(':tenant_id', $tenantId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC)["tenant_id"];
+
 
     }
 

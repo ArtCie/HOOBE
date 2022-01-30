@@ -114,6 +114,15 @@
 
 li > .text{
     text-align: left;
+    font-family: 'Raleway', sans-serif;
+}
+
+.text{
+    font-family: 'Raleway', sans-serif;
+}
+
+.input{
+    font-family: 'Raleway', sans-serif;
 }
 
 li > .input{

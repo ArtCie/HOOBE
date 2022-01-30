@@ -63,37 +63,53 @@
       <ul>
         <li>
           <div class="text">First Name</div>
-          <input id="first_name" class="input" name="first_name" placeholder="Enter first name" type="text">
+          <input id="first_name" class="input" name="first_name" placeholder="Enter first name" type="text" value="<?php  {
+              if (!empty($_GET["first_name"])) {
+                  echo $_GET["first_name"];
+              }
+          } ?>">
         </li>
         <li>
           <div class="text">Last Name</div>
-          <input id="last_name" class="input" name="last_name" placeholder="Enter last name" type="text">
+          <input id="last_name" class="input" name="last_name" placeholder="Enter last name" type="text" value="<?php if (!empty($_GET["last_name"])) {
+              echo $_GET["last_name"];
+          } ?>">
         </li>
         <li class="extend-width">
             <div class="address">
                 <div class="double-row">
                     <div class="text left">Address</div>
-                    <input id="address" class="input double-row" name="address" placeholder="Enter address" type="text">
+                    <input id="address" class="input double-row" name="address" placeholder="Enter address" type="text" value="<?php if (!empty($_GET["street_name"])) {
+                        echo $_GET["street_name"];
+                    } ?>">
                 </div>
                 <div class="double-row">
                     <div class="text left">Address Number</div>
-                    <input id="address_number" class="input double-row" name="address_number" placeholder="Enter address number" type="text">
+                    <input id="address_number" class="input double-row" name="address_number" placeholder="Enter address number" type="text" value="<?php if (!empty($_GET["address_number"])) {
+                        echo $_GET["address_number"];
+                    } ?>">
                 </div>
             </div>
         </li>
         <li>
           <div class="text">Country</div>
-          <input id="country" class="input" name="country" placeholder="Choose country" type="text">
+          <input id="country" class="input" name="country" placeholder="Choose country" type="text" value="<?php if (!empty($_GET["country_name"])) {
+              echo $_GET["country_name"];
+          } ?>">
         </li>
         <li class="extend-width">
             <div class="address">
                 <div class="double-row">
                     <div class="text left">City</div>
-                    <input id="city" class="input double-row" name="city" placeholder="Enter city" type="text">
+                    <input id="city" class="input double-row" name="city" placeholder="Enter city" type="text" value="<?php if (!empty($_GET["city_name"])) {
+                        echo $_GET["city_name"];
+                    } ?>">
                 </div>
                 <div class="double-row">
                     <div class="text left">Postal Code</div>
-                    <input id="postal_code" class="input double-row" name="postal_code" placeholder="  -   " type="text">
+                    <input id="postal_code" class="input double-row" name="postal_code" placeholder="  -   " type="text" value="<?php if (!empty($_GET["postal_code"])) {
+                        echo $_GET["postal_code"];
+                    } ?>">
                 </div>
             </div>
         </li>
@@ -105,23 +121,31 @@
       <ul>
         <li>
           <div class="text">Vehicle type</div>
-          <input id="vehicle_type" class="input" name="vehicle_type" placeholder="Choose vehicle type" type="text">
+          <input id="vehicle_type" class="input" name="vehicle_type" placeholder="Choose vehicle type" type="text" value="<?php if (!empty($_GET["vehicle_name"])) {
+              echo str_replace("'", "", $_GET["vehicle_type"]);
+          } ?>">
         </li>
         <li class="extend-width">
             <div class="address">
                 <div class="double-row">
                     <div class="text left">Vehicle name</div>
-                    <input id="vehicle_name" class="input double-row" name="vehicle_name" placeholder="Enter full vehicle name" type="text">
+                    <input id="vehicle_name" class="input double-row" name="vehicle_name" placeholder="Enter full vehicle name" type="text" value="<?php if (!empty($_GET["vehicle_name"])) {
+                        echo str_replace("'", "", $_GET["vehicle_name"]);
+                    } ?>">
                 </div>
                 <div class="double-row">
                     <div class="text left">Production year</div>
-                    <input id="production_year" class="input double-row" name="production_year" placeholder="Choose year" type="text">
+                    <input id="production_year" class="input double-row" name="production_year" placeholder="Choose year" type="text" value="<?php if (!empty($_GET["production_year"])) {
+                        echo str_replace("'", "", $_GET["production_year"]);
+                    } ?>">
                 </div>
             </div>
         </li>
         <li>
           <div class="text">Last Technical Review Date</div>
-            <input id="last_technical_review_date" class="input" name="last_technical_review_date" placeholder="Choose date" type="date">
+            <input id="last_technical_review_date" class="input" name="last_technical_review_date" placeholder="Choose date" type="date" value="<?php if (!empty($_GET["last_technical_review_date"])) {
+                echo str_replace("'", "", $_GET["last_technical_review_date"]);
+            } ?>">
         </li>
         <li id="upload">
           <div id="seperate_id">
@@ -138,15 +162,21 @@
       <ul>
           <li>
               <div class="text">Rent From</div>
-              <input id="rent_from" class="input" name="rent_from" placeholder="Choose rental period" type="date">
+              <input id="rent_from" class="input" name="rent_from" placeholder="Choose rental period" type="date" value="<?php if (!empty($_GET["rent_from"])) {
+                  echo str_replace("'", "", $_GET["rent_from"]);
+              } ?>">
           </li>
         <li>
           <div class="text">Rental Until</div>
-          <input id="rent_to" class="input" name="rental_until" placeholder="Choose rental period" type="date">
+          <input id="rent_to" class="input" name="rent_to" placeholder="Choose rental period" type="date" value="<?php if (!empty($_GET["rent_to"])) {
+              echo str_replace("'", "", $_GET["rent_to"]);
+          } ?>">
         </li>
         <li>
           <div class="text">Price</div>
-          <input id="price" class="input" name="price" placeholder="Enter price" type="text">
+          <input id="price" class="input" name="price" placeholder="Enter price" type="text" value="<?php if (!empty($_GET["price"])) {
+              echo str_replace("'", "", $_GET["price"]);
+          } ?>">
         </li>
         <li>
           <div class="text">Is negotiable?</div>
@@ -161,7 +191,6 @@
           <div class="add-vehicle">
           <div class="button button-6">
             <div class="spin"></div>
-<!--            <button onclick="validRentalDetails()">Add vehicle</button>-->
               <button type="submit">Add vehicle</button>
           </div>
           </div>
@@ -170,6 +199,9 @@
     </div>
 
   </div>
+        <input type="hidden" id="vehicle_id" name="vehicle_id" value="<?php if (!empty($_GET["vehicle_id"])) {
+            echo str_replace("'", "", $_GET["vehicle_id"]);
+        } ?>">
     </form>
 
   <nav id="bottom-default">

@@ -29,24 +29,38 @@ class RentalController extends AppController
 
 
     public function save_vehicle(){
-        $tenantId = $this->insertTenantInfo($_POST);
-
-        $vehicleId = $this->insertVehicleInfo($_POST, $tenantId);
-
-        $id = $this->insertRentalInfo($_POST, $tenantId, $vehicleId);
-
-        $this->moveFiles($id);
-
-        $this->render('main_page');
-
+        if(!empty($_POST["vehicle_id"])){
+            $this->updateVehicle(intval($_POST["vehicle_id"]));
+            $this->redirect('settings');
         }
+        else {
+            $tenantId = $this->insertTenantInfo($_POST);
+
+            $vehicleId = $this->insertVehicleInfo($_POST, $tenantId);
+
+            $id = $this->insertRentalInfo($_POST, $tenantId, $vehicleId);
+
+            $this->moveFiles($id);
+
+            $this->render('main_page');
+        }
+        }
+
+    private function updateVehicle($vehicle_id)
+    {
+        $tenantId = $this->updateTenantInfo($_POST, $vehicle_id);
+        $this->updateVehicleInfo($_POST, $tenantId, $vehicle_id);
+        $rentalId = $this->updateRentalInfo($_POST,  $tenantId, $vehicle_id);
+
+        $this->deleteOldPhotos($rentalId);
+        $this->moveFiles($rentalId);
+    }
 
     private function moveFiles($id){
         $file_count = count($_FILES['file']['name']);
 
         for( $i=0 ; $i < $file_count ; $i++ ) {
             $tmpFilePath = $_FILES['file']['tmp_name'][$i];
-            echo $tmpFilePath;
 
             if ($tmpFilePath != "") {
                 $newFilePath = self::UPLOAD_DIRECTORY.$_FILES['file']['name'][$i];
@@ -111,7 +125,7 @@ class RentalController extends AppController
           $vehicleDetails["vehicle_type"],
           $vehicleDetails["vehicle_name"],
           $vehicleDetails["production_year"],
-          gmdate('r', (int)$vehicleDetails["last_technical_review_date"] / 1000)
+          date('Y-m-d', strtotime($vehicleDetails["last_technical_review_date"]))
         );
     }
 
@@ -124,8 +138,8 @@ class RentalController extends AppController
             $is_negotiable = true;
         }
         return new RentalDetails(
-            gmdate('r', (int)$rentalDetails["rent_from"] / 1000),
-            gmdate('r', (int)$rentalDetails["rent_to"] / 1000),
+            date('Y-m-d', strtotime($rentalDetails["rent_from"])),
+            date('Y-m-d', strtotime($rentalDetails["rent_to"])),
             $rentalDetails["price"],
             $is_negotiable
         );
@@ -209,17 +223,69 @@ class RentalController extends AppController
         return $vehicleId;
     }
 
-    private function validate(array $file): bool
+    private function updateTenantInfo(array $data, $vehicle_id)
     {
-        if ($file['size'] > self::MAX_FILE_SIZE) {
-            $this->message[] = 'File is too large for destination file system.';
-            return false;
-        }
+        $tenantId = $this->vehicleRepository->getTenantByVehicleId($vehicle_id);
 
-        if (!isset($file['type']) || !in_array($file['type'], self::SUPPORTED_TYPES)) {
-            $this->message[] = 'File type is not supported.';
-            return false;
-        }
-        return true;
+        $tenant = $this->getTenant($data);
+
+        $city_id = $this->get_city_id($tenant->getCity());
+        $postalCodeId = $this->get_postal_code_id($city_id, $tenant->getPostalCode());
+        $countryId = $this->get_country_id($tenant->getCountry());
+
+        $data = [
+            "first_name" => $tenant->getFirstName(),
+            "last_name" => $tenant->getLastName(),
+            "street_name" => $tenant->getStreetName(),
+            "address_number" => $tenant->getStreetNumber(),
+            "postal_code_id" => $postalCodeId,
+            "country_id" => $countryId
+        ];
+
+        $this->vehicleRepository->updateTenant($data, $tenantId);
+
+        return $tenantId;
+    }
+
+    private function updateVehicleInfo(array $data, $tenantId, $vehicle_id)
+    {
+        $vehicle = $this->getVehicle($data);
+
+        $vehicleTypeId = $this->getVehicleTypeId($vehicle->getVehicleType());
+
+        $data = [
+            "tenant_id" => $tenantId,
+            "vehicle_type_id" => $vehicleTypeId,
+            "name" => $vehicle->getVehicleName(),
+            "production_year" => $vehicle->getProductionYear(),
+            "last_technical_review_date" => $vehicle->getLastTechnicalReviewDate(),
+        ];
+
+        $this->vehicleRepository->updateVehicle($data, $vehicle_id);
+
+    }
+
+    private function updateRentalInfo(array $data, $tenantId, $vehicle_id)
+    {
+        $rental = $this->getRental($data);
+
+        $data = [
+            "tenant_id" => $tenantId,
+            "vehicle_id" => $vehicle_id,
+            "rent_from" => $rental->getRentFrom(),
+            "rent_to" => $rental->getRentUntil(),
+            "price" => $rental->getPrice(),
+            "is_negotiable" => $rental->getIsNegotiable()
+        ];
+
+        return $this->rentalRepository->updateRental($data);
+    }
+
+    private function deleteOldPhotos($rentalId)
+    {
+        $data = [
+            "rental_id" => $rentalId
+        ];
+        $this->rentalRepository->deletePhotos($data);
     }
 }

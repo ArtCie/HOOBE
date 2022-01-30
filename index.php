@@ -10,6 +10,7 @@ Router::get('email', 'DefaultController');
 Router::get('login', 'DefaultController');
 Router::get('main_page', 'MapController');
 Router::get('discounts', 'ArticlesController');
+Router::post('update_vehicle', 'SettingsController');
 Router::get('rent_vehicle', 'DefaultController');
 Router::get('registration', 'RegistrationController');
 Router::post('settings', 'SettingsController');

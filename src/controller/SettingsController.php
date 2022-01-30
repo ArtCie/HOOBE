@@ -45,9 +45,17 @@ class SettingsController extends AppController
     }
 
     public function remove_vehicle(){
-//        $userId = $_SESSION["user_id"];
-        $userId = 14;
+        $userId = $_SESSION["user_id"];
         $vehicleId  = json_decode(file_get_contents('php://input'), true)['vehicleId'];
         $this->vehicle_repository->removeVehicle($userId, $vehicleId);
+    }
+
+    public function update_vehicle(){
+        $vehicleId = json_decode(file_get_contents('php://input'), true)["vehicleId"];
+        $data = $this->vehicle_repository->selectVehicleInfo($vehicleId);
+
+        echo json_encode([
+            "data"=> $data,
+        ]);
     }
 }

@@ -22,7 +22,11 @@
   <nav>
       <ul>
           <li>
-              <img alt="logo" src="public/img/logo.svg">
+              <form action="main_page" method="POST">
+                  <button type="submit">
+                    <img alt="logo" src="public/img/logo.svg">
+                  </button>
+              </form>
           </li>
           <li>
               <div class="dropdown">
