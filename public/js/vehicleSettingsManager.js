@@ -15,10 +15,6 @@ function editVehicle(vehicleId){
 }
 
 function setValues(response){
-    console.log(response);
-    console.log(response["last_technical_review_date"]);
-    console.log(response["rent_from"]);
-    console.log(response["rent_to"]);
     const params = '?' +
         'first_name=' + response["first_name"] +
         '&last_name=' + response["last_name"] +

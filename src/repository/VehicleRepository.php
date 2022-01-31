@@ -7,7 +7,6 @@ class VehicleRepository extends Repository
 {
     public function insertVehicle($data)
     {
-        var_dump($data);
         $stmt = $this->database->connect()->prepare('
             INSERT INTO
                 vehicles

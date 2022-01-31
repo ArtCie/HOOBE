@@ -27,4 +27,24 @@ class UserRepository extends Repository
             $user['surname']
         );
     }
+
+    public function selectAccountType(string $userId)
+    {
+        $stmt = $this->database->connect()->prepare('
+            SELECT 
+                at."name"
+            from
+                users u
+            inner join 
+                account_types at
+            on
+                at.id = u.account_type
+            where
+                u.id = :user_id
+        ');
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC)["name"];
+    }
 }

@@ -1,7 +1,10 @@
 function initMap() {
-    navigator.geolocation.getCurrentPosition(showPosition);
+    navigator.geolocation.getCurrentPosition(showPosition, err, {maximumAge:60000, timeout:5000, enableHighAccuracy:true});
 }
 
+function err(){
+    console.log('error');
+}
 
 function showPosition(position) {
     $(function () {

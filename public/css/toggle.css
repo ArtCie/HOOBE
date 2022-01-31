@@ -32,32 +32,32 @@ label{
 label{
     height: 40px;
     width: 40px;
-    background: rgba(255, 255, 255, 1);
-    position: absolute;
+    /*background: rgba(255, 255, 255, 1);*/
+    /*position: absolute;*/
     top: 0.5vh;
     left: 10vh;
     cursor: pointer;
 }
 
-label::before {
-    content: '';
-    height: 30px;
-    width: 2.5px;
-    position: absolute;
-    top: calc(50% - 15px);
-    left: calc(50% - 1.25px);
-    transform: rotate(45deg);
-}
+/*label::before {*/
+/*    content: '';*/
+/*    height: 30px;*/
+/*    width: 2.5px;*/
+/*    position: absolute;*/
+/*    top: calc(50% - 15px);*/
+/*    left: calc(50% - 1.25px);*/
+/*    transform: rotate(45deg);*/
+/*}*/
 
-label::after {
-    content: '';
-    height: 2.5px;
-    width: 30px;
-    position: absolute;
-    top: calc(50% - 1.25px);
-    left: calc(50% - 15px);
-    transform: rotate(45deg);
-}
+/*label::after {*/
+/*    content: '';*/
+/*    height: 2.5px;*/
+/*    width: 30px;*/
+/*    position: absolute;*/
+/*    top: calc(50% - 1.25px);*/
+/*    left: calc(50% - 15px);*/
+/*    transform: rotate(45deg);*/
+/*}*/
 
 label::before,
 label::after{
