@@ -69,4 +69,25 @@ class AdminController extends AppController {
         }
     }
 
+    public function add_article(): void{
+        if(!$_SESSION){
+            $this->render('email');
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        if($this->validAdminPrivileges($user_id) == 1) {
+            $data = json_decode(file_get_contents('php://input'), true);
+            $data = [
+                "header" => $data["header"],
+                "content" => $data["content"],
+                "user_id" => $user_id,
+                "insert_timestamp" => gmdate("Y-m-d H:i:s"),
+                "jpg_path" => "article/" . rand(1, 6)
+            ];
+            var_dump($data);
+            $this->admin_repository->addArticle($data);
+        }
+    }
+
 }

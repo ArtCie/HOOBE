@@ -28,5 +28,6 @@ Router::post('remove_vehicle', 'SettingsController');
 Router::post('admin', 'AdminController');
 Router::post('remove_user', 'AdminController');
 Router::post('remove_comment', 'AdminController');
+Router::post('add_article', 'AdminController');
 
 Router::run($path);

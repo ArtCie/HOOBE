@@ -51,11 +51,18 @@ class AdminRepository extends Repository
         $stmt->execute();
     }
 
-    public function addArticle(string $header, string $content, $email){
+    public function addArticle($data){
         $stmt = $this->database->connect()->prepare('
-            
+            INSERT INTO articles
+                (user_id, headers, content, insert_timestamp, jpg_path)
+            VALUES
+                (:user_id, :headers, :content, :insert_timestamp, :jpg_path)
         ');
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':user_id', $data["user_id"], PDO::PARAM_INT);
+        $stmt->bindParam(':headers', $data["header"], PDO::PARAM_STR);
+        $stmt->bindParam(':content', $data["content"], PDO::PARAM_STR);
+        $stmt->bindParam(':insert_timestamp', $data["insert_timestamp"], PDO::PARAM_STR);
+        $stmt->bindParam(':jpg_path', $data["jpg_path"], PDO::PARAM_STR);
         $stmt->execute();
     }
 

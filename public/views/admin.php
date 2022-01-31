@@ -91,6 +91,7 @@
             </li>
         </ul>
     </nav>
+        <div id="main">
         <div class="display_users">
             <div class="header bigger-header">
             Users + Comments
@@ -121,10 +122,26 @@
                         </div>
                        <?php endforeach;} ?>
             </div>
-        <div class="add_article">
+        <div id="article-section">
+            <div class="header bigger-header">
+                Add article
+            </div>
+            <div id="add-article">
+                <div class="header">
+                    Header
+                </div>
+                <textarea name="text" class="comment resize" id="header"></textarea>
+                <div class="header">
+                    Content
+                </div>
+                <textarea name="text" class="comment resize" id="content"></textarea>
+            </div>
 
+            <div class="button button-6">
+                <div class="spin"></div>
+                <button type="submit" onclick=addArticle()>Add article</button>
+            </div>
         </div>
-
 
     <nav class="bottom">
         <ul>

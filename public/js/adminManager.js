@@ -28,3 +28,21 @@ function removeComment(commentId, idToRemove){
         element.parentNode.removeChild(element);
     });
 }
+
+function addArticle(){
+    const header = document.getElementById("header").value;
+    const content = document.getElementById("content").value;
+
+    const data = {'header': header, 'content': content}
+
+    fetch("/add_article", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(function (response) {
+        header.value = "SUCCESS";
+        content.value = "SUCCESS";
+    });
+}
