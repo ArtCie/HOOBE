@@ -60,13 +60,6 @@
                               </div>
                           </div>
                           <div class="toggle_text">
-                              Panek
-                              <input type="checkbox" id="panek_box" onclick="put_filters()"/>
-                              <div>
-                                  <label class="panek_height" for="panek_box"></label>
-                              </div>
-                          </div>
-                          <div class="toggle_text">
                               Private vehicles
                               <input type="checkbox" id="private_vehicles_box" onclick="put_filters()"/>
                               <div>
@@ -81,7 +74,7 @@
           </li>
           <li>
               <form action="discounts" method="POST">
-                  <button href="#" class="dropbtn">
+                  <button class="dropbtn">
                     <i class="fas fa-percent"></i>
                     Discounts
                   </button>

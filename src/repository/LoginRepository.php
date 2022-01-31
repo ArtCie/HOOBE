@@ -9,7 +9,8 @@ class LoginRepository extends Repository
     public function select_password_data(string $email)
     {
         $stmt = $this->database->connect()->prepare('
-            SELECT 
+            SELECT
+                id,
                 password, 
                 password_salt 
             FROM 

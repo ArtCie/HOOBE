@@ -38,7 +38,7 @@ body {
     margin: 2em;
 }
 
-a, button {
+a, button, li {
     color: #707070;
     text-decoration: none;
     letter-spacing: 0.25em;
@@ -113,7 +113,7 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 1em;
+    /*margin: 1em;*/
 }
 
 @media screen and (max-width: 480px), screen and(max-device-width: 480px) {
@@ -220,3 +220,25 @@ button, input[type="submit"], input[type="reset"] {
 .opacity_full{
     opacity: 1;
 }
+
+.display-email{
+    margin: 1em 3em;
+    font-weight: bold;
+    font-size: larger;
+    display: flex;
+}
+
+.display-comment{
+    margin: 0.5em 5em;
+    font-size: larger;
+    display: flex;
+}
+
+.bigger-header{
+    font-size: xx-large;
+}
+
+.remove_button{
+    color: red;
+}
+

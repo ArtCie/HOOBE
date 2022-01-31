@@ -9,48 +9,84 @@
   <link rel="stylesheet" type="text/css" href="public/css/main_page.css">
   <link rel="stylesheet" type="text/css" href="public/css/discounts.css">
   <link rel="stylesheet" type="text/css" href="public/css/rent.css">
+    <link rel="stylesheet" type="text/css" href="public/css/toggle.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <title>Rent Vehicle</title>
   <script src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
   <script src="public/js/validRentalDetails.js"></script>
+    <script src="public/js/logout.js"></script>
 </head>
 <body>
 <div class="main">
   <nav>
     <ul>
+        <li>
+            <form action="main_page" method="POST">
+                <button type="submit">
+                    <img alt="logo" src="public/img/logo.svg">
+                </button>
+            </form>
+        </li>
       <li>
-        <img alt="logo" src="public/img/logo.svg">
-      </li>
-      <li>
-        <div class="dropdown">
-          <a href="#" class="dropbtn">
-            <i class="fas fa-filter "></i>
-            Filter
-            <span class="i material-icons">
+          <div class="dropdown">
+              <a href="#" class="dropbtn">
+                  <i class="fas fa-filter "></i>
+                  Filter
+                  <span class="i material-icons">
                             expand_more
                       </span>
-          </a>
-          <div class="dropdown-content">
-            <a href="#">Bolt</a>
-            <a href="#">Lime</a>
-            <a href="#">Tier</a>
-            <a href="#">Panek</a>
-            <a href="#">Private Vehicles</a>
+              </a>
+              <div class="dropdown-content">
+                  <div class="toggle_text">
+                      Bolt
+                      <input type="checkbox" id="bolt_box" onclick="put_filters(); "/>
+                      <div>
+                          <label class="bolt_height" for="bolt_box"></label>
+                      </div>
+                  </div>
+                  <div class="toggle_text">
+                      Lime
+                      <input type="checkbox" id="lime_box" onclick="put_filters()"/>
+                      <div>
+                          <label class="lime_height" for="lime_box"></label>
+                      </div>
+                  </div>
+                  <div class="toggle_text">
+                      Tier
+                      <input type="checkbox" id="tier_box" onclick="put_filters()"/>
+                      <div>
+                          <label class="tier_height" for="tier_box"></label>
+                      </div>
+                  </div>
+                  <div class="toggle_text">
+                      Private vehicles
+                      <input type="checkbox" id="private_vehicles_box" onclick="put_filters()"/>
+                      <div>
+                          <label class="private_vehicles_height" for="private_vehicles_box"></label>
+                      </div>
+                  </div>
+              </div>
+              <script type="text/javascript" async>
+                  load_filters()
+              </script>
           </div>
-        </div>
       </li>
-      <li>
-        <a href="#" class="dropbtn">
-          <i class="fas fa-percent"></i>
-          Discounts
-        </a>
-      </li>
-      <li>
-        <a href="#" class="dropbtn">
-          <i class="fas fa-car"></i>
-          Rent your vehicle
-        </a>
-      </li>
+        <li>
+            <form action="discounts" method="POST">
+                <button href="#" class="dropbtn">
+                    <i class="fas fa-percent"></i>
+                    Discounts
+                </button>
+            </form>
+        </li>
+        <li>
+            <form class="login-container" action="rent_vehicle" method="GET">
+                <button type="submit" class="dropbtn">
+                    <i class="fas fa-car"></i>
+                    Rent your vehicle
+                </button>
+            </form>
+        </li>
     </ul>
   </nav>
   <div class="map-wrapper">
@@ -206,23 +242,25 @@
 
   <nav id="bottom-default">
     <ul>
-      <li>
-        <a class="line" href="#" >
-                  <span class="material-icons">
-                        settings
-                    </span>
-          Settings
-        </a>
-      </li>
+        <li>
+            <form action="settings" method="GET">
+                <button class="line">
+                      <span class="material-icons">
+                            settings
+                        </span>
+                    Settings
+                </button>
+            </form>
+        </li>
 
-      <li>
-        <a class="line" href="#">
+        <li>
+            <button class="line" onclick="logout()">
                 <span class="material-icons">
                         logout
                 </span>
-          Log out
-        </a>
-      </li>
+                Log out
+            </button>
+        </li>
     </ul>
   </nav>
 </div>
