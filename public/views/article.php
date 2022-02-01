@@ -29,7 +29,7 @@
     <nav>
         <ul>
             <li>
-                <form action="main_page" method="POST">
+                <form action="main_page" method="GET">
                     <button type="submit">
                         <img alt="logo" src="public/img/logo.svg">
                     </button>
