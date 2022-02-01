@@ -21,28 +21,27 @@ class LoginController extends AppController {
     public function login(): void
     {
 
-        if (!$this->isPost()) {
+        if (!$this->isPost() || empty($_SESSION['email'])) {
             $this->render('login');
         }
+        else {
+            $email = $_SESSION['email'];
+            $password = $_POST['password'];
 
-        $email = $_SESSION['email'];
-        $password = $_POST['password'];
-
-        $user = new ValidUser($email, $password);
+            $user = new ValidUser($email, $password);
 
 
-        $result = $this->valid_password($user);
-        if($result["passwordValid"]){
-            $account_type = $this->userRepository->selectAccountType($result["id"]);
-            if($account_type == 'admin'){
-                $this->redirect('admin');
+            $result = $this->valid_password($user);
+            if ($result["passwordValid"]) {
+                $account_type = $this->userRepository->selectAccountType($result["id"]);
+                if ($account_type == 'admin') {
+                    $this->redirect('admin');
+                } else {
+                    $this->redirect('main_page');
+                }
             }
-            else{
-            $this->redirect('main_page');
-            }
+//            $this->render('login');
         }
-
-        $this->render('login');
     }
 
     public function valid_password(ValidUser $user)

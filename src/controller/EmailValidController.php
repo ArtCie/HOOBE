@@ -18,6 +18,7 @@ class EmailValidController extends AppController {
 
     public function email()
     {
+
         $email = $_POST['email'];
         $_SESSION["email"] = $email;
 

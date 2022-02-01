@@ -42,18 +42,33 @@ class MapController extends AppController
     }
 
     public function get_user_filters(){
-        $user_id = $_SESSION['user_id'];
-        return $this->FilterRepository->getFilters($user_id);
+        if(empty($_SESSION["user_id"])){
+            return $this->redirect("email");
+        }
+        else {
+            $user_id = $_SESSION['user_id'];
+            return $this->FilterRepository->getFilters($user_id);
+        }
     }
 
     public function update_filters($data)
     {
-        $user_id = $_SESSION['user_id'];
-        $this->FilterRepository->updateFilters($user_id, $data);
+        if(empty($_SESSION["user_id"])){
+            $this->redirect("email");
+        }
+        else {
+            $user_id = $_SESSION['user_id'];
+            $this->FilterRepository->updateFilters($user_id, $data);
+        }
     }
 
     public function logout(){
+        if(empty($_SESSION["user_id"])){
+            $this->redirect("email");
+        }
+        else{
         session_destroy();
         $this->render('email');
+    }
     }
 }

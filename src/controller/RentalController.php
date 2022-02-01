@@ -10,7 +10,7 @@ require_once('src/models/RentalDetails.php');
 
 class RentalController extends AppController
 {
-    const MAX_FILE_SIZE = 1024*1024;
+    const MAX_FILE_SIZE = 1024 * 1024;
     const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/app/public/img/uploads/';
 
@@ -20,7 +20,8 @@ class RentalController extends AppController
     private $rentalRepository;
     private $message = [];
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         $this->tenantRepository = new TenantRepository();
         $this->vehicleRepository = new VehicleRepository();
@@ -28,49 +29,56 @@ class RentalController extends AppController
     }
 
 
-    public function save_vehicle(){
-        if(!empty($_POST["vehicle_id"])){
-            $this->updateVehicle(intval($_POST["vehicle_id"]));
-            $this->redirect('settings');
+    public function save_vehicle()
+    {
+        if (empty($_SESSION["user_id"])) {
+            $this->redirect("email");
+        } else {
+            if (!empty($_POST["vehicle_id"])) {
+                $this->updateVehicle(intval($_POST["vehicle_id"]));
+                $this->redirect('settings');
+            } else {
+                $tenantId = $this->insertTenantInfo($_POST);
+
+                $vehicleId = $this->insertVehicleInfo($_POST, $tenantId);
+
+                $id = $this->insertRentalInfo($_POST, $tenantId, $vehicleId);
+
+                $this->moveFiles($id);
+
+                $this->render('main_page');
+            }
         }
-        else {
-            $tenantId = $this->insertTenantInfo($_POST);
-
-            $vehicleId = $this->insertVehicleInfo($_POST, $tenantId);
-
-            $id = $this->insertRentalInfo($_POST, $tenantId, $vehicleId);
-
-            $this->moveFiles($id);
-
-            $this->render('main_page');
-        }
-        }
+    }
 
     private function updateVehicle($vehicle_id)
     {
         $tenantId = $this->updateTenantInfo($_POST, $vehicle_id);
         $this->updateVehicleInfo($_POST, $tenantId, $vehicle_id);
-        $rentalId = $this->updateRentalInfo($_POST,  $tenantId, $vehicle_id);
+        $rentalId = $this->updateRentalInfo($_POST, $tenantId, $vehicle_id);
 
         $this->deleteOldPhotos($rentalId);
         $this->moveFiles($rentalId);
     }
 
-    private function moveFiles($id){
+    private function moveFiles($id)
+    {
         $file_count = count($_FILES['file']['name']);
 
-        for( $i=0 ; $i < $file_count ; $i++ ) {
+        for ($i = 0; $i < $file_count; $i++) {
             $tmpFilePath = $_FILES['file']['tmp_name'][$i];
 
             if ($tmpFilePath != "") {
-                $newFilePath = self::UPLOAD_DIRECTORY.$_FILES['file']['name'][$i];
+                $newFilePath = self::UPLOAD_DIRECTORY . $_FILES['file']['name'][$i];
                 $this->rentalRepository->insertVehiclePhoto($id, $newFilePath);
                 move_uploaded_file($tmpFilePath, $newFilePath);
             }
 
         }
     }
-    private function insertTenantInfo($data){
+
+    private function insertTenantInfo($data)
+    {
         $tenant = $this->getTenant($data);
 
         $city_id = $this->get_city_id($tenant->getCity());
@@ -80,7 +88,8 @@ class RentalController extends AppController
         return $this->getTenantId($postal_code_id, $country_id, $tenant);
     }
 
-    private function insertVehicleInfo($data, $tenant_id){
+    private function insertVehicleInfo($data, $tenant_id)
+    {
         $vehicle = $this->getVehicle($data);
 
         $vehicleTypeId = $this->getVehicleTypeId($vehicle->getVehicleType());
@@ -122,19 +131,18 @@ class RentalController extends AppController
     private function getVehicle($vehicleDetails): Vehicle
     {
         return new Vehicle(
-          $vehicleDetails["vehicle_type"],
-          $vehicleDetails["vehicle_name"],
-          $vehicleDetails["production_year"],
-          date('Y-m-d', strtotime($vehicleDetails["last_technical_review_date"]))
+            $vehicleDetails["vehicle_type"],
+            $vehicleDetails["vehicle_name"],
+            $vehicleDetails["production_year"],
+            date('Y-m-d', strtotime($vehicleDetails["last_technical_review_date"]))
         );
     }
 
     private function getRental($rentalDetails): RentalDetails
     {
-        if($rentalDetails["is_negotiable"]){
-           $is_negotiable = false;
-        }
-        else{
+        if ($rentalDetails["is_negotiable"]) {
+            $is_negotiable = false;
+        } else {
             $is_negotiable = true;
         }
         return new RentalDetails(
@@ -149,7 +157,7 @@ class RentalController extends AppController
     {
         $city_id = $this->tenantRepository->get_city_id_by_city_name($city);
 
-        if(!$city_id){
+        if (!$city_id) {
             $city_id = $this->tenantRepository->insert_city($city);
         }
         return $city_id;
@@ -159,7 +167,7 @@ class RentalController extends AppController
     {
         $postalCodeId = $this->tenantRepository->get_postal_code_id($cityId, $postalCode);
 
-        if(!$postalCodeId){
+        if (!$postalCodeId) {
             $postalCodeId = $this->tenantRepository->insert_postal_code($cityId, $postalCode);
         }
         return $postalCodeId;
@@ -169,7 +177,7 @@ class RentalController extends AppController
     {
         $countryId = $this->tenantRepository->getCountryId($country);
 
-        if(!$countryId){
+        if (!$countryId) {
             $countryId = $this->tenantRepository->insertCountry($country);
         }
         return $countryId;
@@ -188,7 +196,7 @@ class RentalController extends AppController
         ];
         $tenant_id = $this->tenantRepository->selectTenantId($userId, $data);
 
-        if(!$tenant_id){
+        if (!$tenant_id) {
             $tenant_id = $this->tenantRepository->insertTenantDetails($userId, $data);
         }
 
@@ -198,7 +206,7 @@ class RentalController extends AppController
     private function getVehicleTypeId($vehicleTypeName)
     {
         $vehicleTypeId = $this->vehicleRepository->selectVehicleTypeByName($vehicleTypeName);
-        if(!$vehicleTypeId){
+        if (!$vehicleTypeId) {
             $vehicleTypeId = $this->vehicleRepository->insertVehicleType($vehicleTypeName);
         }
 
@@ -213,10 +221,10 @@ class RentalController extends AppController
             "name" => $vehicle->getVehicleName(),
             "productionYear" => $vehicle->getProductionYear(),
             "lastTechnicalReviewDate" => $vehicle->getLastTechnicalReviewDate(),
-            ];
+        ];
         $vehicleId = $this->vehicleRepository->selectVehicleId($data);
 
-        if(!$vehicleId){
+        if (!$vehicleId) {
             $vehicleId = $this->vehicleRepository->insertVehicle($data);
         }
 

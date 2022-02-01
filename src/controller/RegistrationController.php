@@ -17,23 +17,24 @@ class RegistrationController extends AppController
 
     public function registration()
     {
-        if (!$this->isPost()) {
-            return $this->render('registration');
+
+        if (!$this->isPost() or empty($_SESSION['email'])) {
+            $this->render('registration');
+        } else {
+            $email = $_SESSION['email'];
+            $password = $_POST['password'];
+            [$hashed_password, $hashed_salt] = $this->hash_password($password);
+
+            $insert_timestamp = gmdate("Y/m/d H:i:s");
+
+            $id = $this->registerRepository->registerUser($email, $hashed_password, $hashed_salt, "1", $insert_timestamp);
+
+            $_SESSION["user_id"] = $id;
+
+            $this->registerRepository->registerPreferences($id);
+
+            $this->redirect('main_page');
         }
-
-        $email = $_SESSION['email'];
-        $password = $_POST['password'];
-        [$hashed_password, $hashed_salt] = $this->hash_password($password);
-
-        $insert_timestamp =  gmdate("Y/m/d H:i:s");
-
-        $id = $this->registerRepository->registerUser($email, $hashed_password, $hashed_salt, "1", $insert_timestamp);
-
-        $_SESSION["user_id"] = $id;
-
-        $this->registerRepository->registerPreferences($id);
-
-        return $this->redirect('main_page');
     }
 
     public function hash_password(string $password){
